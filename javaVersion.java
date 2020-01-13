@@ -1,5 +1,7 @@
 import java.util.Stack;
 
+import sun.launcher.resources.launcher;
+
 class Solution {
     public class ListNode {
        int val;
@@ -122,6 +124,30 @@ class Solution {
         return result;
 
     }
+    //1021
+    public String removeOuterParentheses(String S) {
+        int count = 0; // count the order of the parantheses
+        int check = 0; // check the validity of the parantheses
+        String result  = "";
+        for (int  i = 0 ; i < S.length(); i++){
+            if (check == 0 && S.charAt(i) == '('){
+                check ++;
+                count ++;
+            } else if (check != 0 && S.charAt(i) == '(' ){
+                count++;
+                check++;
+                result += '(';
+            } else if (check != 1 && S.charAt(i) == ')' && count != 1) {
+                check --;
+                result += ')';
+            } else {
+                check --;
+                count --;
+            }
+        }
+        return result;
+    }
+    //
     public static void main(String[] args) {
         String input = "1.1.1.1";
         int[] nums = {12,345,2,6,7896};
