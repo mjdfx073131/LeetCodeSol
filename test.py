@@ -76,4 +76,22 @@ def freqAlphabets(s: str) -> str:
             elif s[i] == '9':
                 result += 'i'
     return result
-print(freqAlphabets('1326#'))
+#1299
+def replaceElements(arr):
+        for i in range (len(arr)):
+            arr[i] = max(arr[(i+1):])
+        return arr
+    
+def flipAndInvertImage(A):
+        result = []
+        for list in A:
+            list.reverse()
+            for i in range (len(list)):
+                if list[i] == 0:
+                    list[i] == 1
+                else:
+                    list[i] == 0
+
+            result.append(list)
+        return result
+print(flipAndInvertImage([[1,1,0],[1,0,1],[0,0,0]]))

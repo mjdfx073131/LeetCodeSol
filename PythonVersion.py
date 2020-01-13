@@ -142,6 +142,62 @@ class Solution:
                     result += 'i'
                     i+=1
         return result
+
+    #1299
+    def replaceElements(self, arr: List[int]) -> List[int]:
+        # for i in range (len(arr)-1):
+        #     arr[i] = max(arr[(i+1):])
+        # arr[len(arr)-1] = -1
+
+        #this is a faster solution 
+        out = [-1]
+        greatest = 0
+        for num in arr[::-1]:
+            if greatest < num:
+                greatest = num
+            out.append(greatest)
+        out.pop()
+        return out[::-1]
             
-        
+    #804
+    def uniqueMorseRepresentations(self, words: List[str]) -> int:
+        arr = [".-","-...","-.-.","-..",".","..-.","--.","....","..",
+        ".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...",
+        "-","..-","...-",".--","-..-","-.--","--.."]
+        result= []
+        for word in words:
+            temp = ""
+            for i in range (0, len(word)):
+                temp += arr[ord(word[i])-97] # since a =97 ASCII
+            result.append(temp)
+        return len(set(result))
+    
+    #832
+    def flipAndInvertImage(self, A: List[List[int]]) -> List[List[int]]:
+         result = []
+        for list in A:
+            list.reverse()
+            temp = []
+            for i in range (len(list)):
+                if list[i] == 0:
+                    temp.append(1)
+                else:
+                    temp.append(0)
+
+            result.append(temp)
+        return result
+    
+    #905
+    def sortArrayByParity(self, A: List[int]) -> List[int]:
+        result =[]
+        for i in range (len(A)):
+            if (A[i] % 2 == 0 ):
+                result.insert(0,A[i])
+            else:
+                result.append(A[i])
+        return result
+    
+    
+
+
                   
