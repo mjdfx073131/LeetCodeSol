@@ -197,6 +197,52 @@ class Solution:
                 result.append(A[i])
         return result
     
+    #961
+    def repeatedNTimes(self, A: List[int]) -> int:
+        s = set()
+        for x in A:
+            if x in s:
+                return x
+            else:
+                s.add(x)
+
+    #657
+    def judgeCircle(self, moves: str) -> bool:
+         x=y = 0
+        for move in moves:
+            if move == 'U':
+                y+=1
+            elif move == 'D':
+                y-=1
+            elif move == 'L':
+                x-=1
+            elif move == 'R':
+                x+=1
+        return (x,y) == (0,0)
+  
+    #728
+    def selfDividingNumbers(self, left: int, right: int) -> List[int]:
+        result =[]
+        for i in range (left, right+1):
+            temp = i
+            bit =0 
+            count = 0
+            while i >0:
+                digit = i % 10
+                if digit == 0:
+                    bit+=1
+                    break
+                if temp % digit== 0:
+                    count+=1
+                bit+=1
+                i//=10
+            if (bit == count):
+                result.append(temp)
+        return result
+                    
+
+    
+
     
 
 
