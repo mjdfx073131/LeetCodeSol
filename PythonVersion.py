@@ -1,3 +1,9 @@
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
 class Solution:
     #1266
     def minTimeToVisitAllPoints(self, points: List[List[int]]) -> int:
@@ -240,10 +246,48 @@ class Solution:
                 result.append(temp)
         return result
                     
-
+    #617
+    def mergeTrees(self, t1: TreeNode, t2: TreeNode) -> TreeNode:
+        if not t1 and not t2: return None
+        if not t1 or not t2: return t2 or t1
+        n = TreeNode(t1.val+ t2.val)
+        n.left = self.mergeTrees(t1.left, t2.left)
+        n.right = self.mergeTrees(t1.right, t2.right)
+        return n
     
-
-    
-
-
+    #977
+    def sortedSquares(self, A: List[int]) -> List[int]:
+        return sorted([x*x for x in A])
+        
+    #1207
+    def uniqueOccurrences(self, arr: List[int]) -> bool:
+        s = sorted(arr)
+        check = set()
+        count = 0
+        current = 0
+        for i in range (len(s)):
+            if (count ==0):
+                count += 1
+                current = s[i]
+            elif s[i] == current:
+                count += 1
+            elif s[i] != current:
+                if count in check:
+                    return False
+                else:
+                    check.add(count)
+                    count = 1
+                    current = s[i]
+            if (i == len(s)-1):
+                if count in check:
+                    return False
+        return True
+    def uniqueOccurrencesAnotherFasterWay(self, arr: List[int]) -> bool:
+        dic = {}
+        for i in arr:
+            if i not in dic:
+                dic[i] = 1
+            else:
+                dic[i]+=1
+        return len(dic) == len(set(dic.values()))        
                   
