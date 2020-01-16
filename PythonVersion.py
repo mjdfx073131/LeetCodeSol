@@ -291,3 +291,6 @@ class Solution:
                 dic[i]+=1
         return len(dic) == len(set(dic.values()))        
                   
+    #461
+    def hammingDistance(self, x: int, y: int) -> int:
+        return (bin(x^y)).count('1')
