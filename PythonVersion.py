@@ -294,3 +294,31 @@ class Solution:
     #461
     def hammingDistance(self, x: int, y: int) -> int:
         return (bin(x^y)).count('1')
+    
+    #852 
+    def peakIndexInMountainArray(self, A: List[int]) -> int:
+        return A.index(max(A))
+    
+    #942
+    def diStringMatch(self, S: str) -> List[int]:
+        # result = [0]
+        # for x in S:
+        #     lastDigit = result[len(result)-1]
+        #     if (x == 'I'):
+        #         result.append(lastDigit +1)
+        #      elif (x == 'D'):
+        #          result.append(lastDigit - 1)
+        # return result
+        low = 0
+        high = len(S)
+        result = []
+        for x in S:
+            if x == 'I':
+                result.append(low)
+                low+=1
+            else:
+                result.append(high)
+                high -=1
+        result.append(low)
+        return result
+
