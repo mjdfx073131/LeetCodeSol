@@ -322,3 +322,13 @@ class Solution:
         result.append(low)
         return result
 
+    #700
+    def searchBST(self, root: TreeNode, val: int) -> TreeNode:
+        while root:
+            if val == root.val:
+                break
+            elif val < root.val:
+                root = root.left
+            else:
+                root = root.right
+        return root
