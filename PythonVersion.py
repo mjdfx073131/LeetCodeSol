@@ -332,3 +332,15 @@ class Solution:
             else:
                 root = root.right
         return root
+
+    #589
+    def preorder(self, root: 'Node') -> List[int]:
+        result = []
+        def recursion (root: 'Node'):
+            if (root != None):
+                result.append(root.val)
+                for child in root.children:
+                    recursion(child)
+        recursion(root)
+            
+        return result
