@@ -344,3 +344,15 @@ class Solution:
         recursion(root)
             
         return result
+    #590
+    def postorder(self, root: 'Node') -> List[int]:
+        result = []
+        def recursion (root: 'Node'):
+            if (root == None):
+                return 
+            else:
+                for child in root.children:
+                    recursion(child)
+            result.append(root.val)
+        recursion(root)
+        return result
