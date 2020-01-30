@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Stack;
 
 import sun.launcher.resources.launcher;
@@ -147,7 +148,36 @@ class Solution {
         }
         return result;
     }
-    //
+
+    //1051
+    public int heightChecker(int[] heights) {
+        int count = 0;
+        int[] newA = heights.clone();
+        Arrays.sort(newA);
+        for (int i =0; i< newA.length;i++) {
+            if (heights[i] != newA[i]) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    //922
+    public int[] sortArrayByParityII(int[] A) {
+        int[] result =new int[A.length];
+        int odd = 1;
+        int even = 0;
+        for (int i =0; i< A.length; i++) {
+            if (A[i] % 2 == 0 ){
+                result[even] = A[i];
+                even +=2;
+            } else {
+                result[odd] = A[i];
+                odd +=2;
+            }
+        }
+        return result;
+    }
     public static void main(String[] args) {
         String input = "1.1.1.1";
         int[] nums = {12,345,2,6,7896};
