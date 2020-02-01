@@ -356,3 +356,14 @@ class Solution:
             result.append(root.val)
         recursion(root)
         return result
+    
+    #929
+    def numUniqueEmails(self, emails: List[str]) -> int:
+        result = []
+        for email in emails:
+            split = email.split('@')
+            local = split[0].replace('.', '')
+            if '+' in split[0]:
+                local = local[:local.index('+')]
+            result.append(local + '@' + split[1])
+        return len(set(result))
