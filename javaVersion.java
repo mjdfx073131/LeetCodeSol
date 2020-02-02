@@ -1,7 +1,7 @@
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Stack;
 
-import sun.launcher.resources.launcher;
 
 class Solution {
     public class ListNode {
@@ -179,8 +179,13 @@ class Solution {
         return result;
     }
     public static void main(String[] args) {
-        String input = "1.1.1.1";
-        int[] nums = {12,345,2,6,7896};
-        findNumbers(nums);
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        map.put('a', 1);
+        map.put('b', 1);
+        System.out.println(map.get('a') == map.get('b'));
+        map.put('c', 127);
+        map.put('d', -128);
+        System.out.println(map.get('c') == map.get('d'));
+        System.out.println(map.get('c').equals(map.get('d')));
     }
 }
