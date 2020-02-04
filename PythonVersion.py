@@ -387,5 +387,18 @@ class Solution:
         return ["{} {}".format(dic[k],k) for k in dic]
 
 
-
-
+    #557 thumb up 801
+    def reverseWords(self, s: str) -> str:
+        split = s.split(" ")
+        result = ""
+        count = 0
+        for word in split:
+            result += word[::-1]
+            count +=1
+            if count != len(split):
+                result += " "
+        return result 
+    def reverseWordsTwoLineVERSION(self, s: str) -> str:
+        # from solution online
+        words = s.split() 
+        return ' '.join([word[::-1] for word in words]) #  I should also write the code in one line
