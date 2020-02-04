@@ -367,3 +367,25 @@ class Solution:
                 local = local[:local.index('+')]
             result.append(local + '@' + split[1])
         return len(set(result))
+
+    #811
+    def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
+        dic = {}
+        for domain in cpdomains:
+            split = domain.split(" ")
+            count = int(split[0])
+            subDomain = split[1].split(".")
+            i = len(subDomain) - 1
+            str = subDomain[i]
+            while i >= 0:
+                if str not in dic:
+                    dic[str]= count
+                else:
+                    dic[str]+= count
+                str = subDomain[i-1] + "." + str
+                i-=1
+        return ["{} {}".format(dic[k],k) for k in dic]
+
+
+
+
