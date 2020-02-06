@@ -402,3 +402,22 @@ class Solution:
         # from solution online
         words = s.split() 
         return ' '.join([word[::-1] for word in words]) #  I should also write the code in one line
+
+    #1122
+    def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
+        dic = {}
+        notIn = []
+        result = []
+        for i in arr2:
+            dic[i] = []
+        for i in arr1:
+            if i in arr2:
+                dic[i].append(i)
+            else:
+                notIn.append(i)
+        
+        for key in dic:
+            result += dic[key]
+        notIn.sort()
+        result += notIn
+        return result
