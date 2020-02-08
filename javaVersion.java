@@ -178,6 +178,7 @@ class Solution {
         }
         return result;
     }
+    
     public static void main(String[] args) {
         HashMap<Character, Integer> map = new HashMap<Character, Integer>();
         map.put('a', 1);

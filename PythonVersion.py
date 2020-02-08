@@ -421,3 +421,13 @@ class Solution:
         notIn.sort()
         result += notIn
         return result
+    
+    #559 dynamic programming
+    def maxDepth(self, root: 'Node') -> int:
+        if not root:
+            return 0
+        if all(child == None for child in root.children):
+            return 1
+        return 1 + max(self.maxDepth(child) for child in root.children)
+
+    
