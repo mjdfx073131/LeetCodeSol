@@ -431,3 +431,12 @@ class Solution:
         return 1 + max(self.maxDepth(child) for child in root.children)
 
     
+    #897
+    def increasingBST(self, root: TreeNode) -> TreeNode:
+        def dfs(cur, pre):
+            if cur is None: return pre
+            rt = dfs(cur.left, cur)
+            cur.left, cur.right = None, dfs(cur.right, pre)
+            return rt
+        if root is None: return None
+        return dfs(root, None)
