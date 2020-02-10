@@ -440,3 +440,17 @@ class Solution:
             return rt
         if root is None: return None
         return dfs(root, None)
+
+    #965
+    def isUnivalTree(self, root: TreeNode) -> bool:
+        check = True
+        value = root.val
+        def recursion (check: bool, root: TreeNode):
+            if root.val != value:
+                return check & False
+            if root.left = None and root.right = None:
+                return
+            else:
+                return recursion(check, root.left) & recursion(check, root.right)
+        recursion(check, root)
+        return check

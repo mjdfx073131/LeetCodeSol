@@ -178,7 +178,25 @@ class Solution {
         }
         return result;
     }
+
+    //965
+    public boolean isUnivalTree(TreeNode root) {
+        boolean check = true;
+        int value = root.val;
+        return recursion (check, root, value);
+    }
     
+    private boolean recursion (boolean check, TreeNode root, int standard) {
+        if (root == null) {
+            return true;
+        }
+        if (root.val != standard) {
+            return false & check;
+        }
+        else {
+            return recursion (check, root.left, standard) & recursion (check, root.right, standard);
+        }
+    }
     public static void main(String[] args) {
         HashMap<Character, Integer> map = new HashMap<Character, Integer>();
         map.put('a', 1);
