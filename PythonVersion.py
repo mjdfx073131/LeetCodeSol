@@ -454,3 +454,16 @@ class Solution:
                 return recursion(check, root.left) & recursion(check, root.right)
         recursion(check, root)
         return check
+    #1160
+    def countCharacters(self, words: List[str], chars: str) -> int:
+        result = 0
+        for word in words:
+            length = len(word)
+            for ch in word:
+                if word.count(ch) <= chars.count(ch):
+                    length -= 1
+                else:
+                    break
+                if length == 0:
+                    result += len(word)
+        return result
