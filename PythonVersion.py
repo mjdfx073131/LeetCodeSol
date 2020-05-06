@@ -467,3 +467,17 @@ class Solution:
                 if length == 0:
                     result += len(word)
         return result
+
+    #1047
+    def removeDuplicates(self, S: str) -> str:
+        result = []
+        for i in S:
+            if(result and result[-1]==i):
+                result.pop()
+            else:
+                result.append(i)
+        return "".join(result)
+
+    #1002
+    def commonChars(self, A: List[str]) -> List[str]:
+        
