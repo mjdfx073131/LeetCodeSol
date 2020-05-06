@@ -480,4 +480,28 @@ class Solution:
 
     #1002
     def commonChars(self, A: List[str]) -> List[str]:
-        
+        result = []
+        dic = {}
+        for char in A[0]:
+            if char not in dic:
+                dic[char] = A[0].count(char)
+        for i in range(1,len(A)):
+            #print(A[i])
+            for char in A[i]:
+                if char in dic:
+                    #print("Before:" + str(min(dic[char],A[i].count(char))))
+                    dic[char] = min(dic[char],A[i].count(char))
+                    #print("After:" +str(dic[char]))
+                for chr in dic:
+                    if chr not in A[i]:
+                        dic[chr] = 0
+            #print("**********")
+        for char in dic:
+            for i in range (0,dic[char]):
+                result.append(char)
+        return result
+                    
+
+          
+
+

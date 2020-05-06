@@ -83,15 +83,55 @@ def replaceElements(arr):
         return arr
     
 def flipAndInvertImage(A):
-        result = []
-        for list in A:
-            list.reverse()
-            for i in range (len(list)):
-                if list[i] == 0:
-                    list[i] == 1
-                else:
-                    list[i] == 0
+        # result = []
+        # for list in A:
+        #     list.reverse()
+        #     for i in range (len(list)):
+        #         if list[i] == 0:
+        #             list[i] == 1
+        #         else:
+        #             list[i] == 0
 
-            result.append(list)
-        return result
-print(flipAndInvertImage([[1,1,0],[1,0,1],[0,0,0]]))
+        #     result.append(list)
+        # return result
+    result = []
+    dic = {}
+    for char in A[0]:
+        if char not in dic:
+            dic[char] = A[0].count(char)
+    for i in range(1,len(A)):
+        print(A[i])
+        for char in A[i]:
+            if char in dic:
+                print("Before:" + str(min(dic[char],A[i].count(char))))
+                dic[char] = min(dic[char],A[i].count(char))
+                print("After:" +str(dic[char]))
+            for chr in dic:
+                if chr not in A[i]:
+                    dic[chr] = 0
+        print("**********")
+    for char in dic:
+        for i in range (0,dic[char]):
+            result.append(char)
+    return result
+
+#1002
+# def commonChars(self, A: List[str]):
+#     result = []
+#     dic = {}
+#     for char in A[0]:
+#         if char not in dic:
+#             dic[char] = A[0].count(char)
+#     for i in range(1,len(A)-1):
+#         print(A[i])
+#         for char in A[i]:
+#             if char in dic:
+#                 print("Before:"+ min(dic[char],A[i].count(char)))
+#                 dic[char] = min(dic[char],A[i].count(char))
+#                 print("After:"+ dic[char])
+#     for char in dic:
+#         for i in range (0,dic[char]):
+#             result.append(char)
+#     return result
+print(flipAndInvertImage(["cool","lock","cook"]))
+# print(commonChars(["bella","label","roller"]))
