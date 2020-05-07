@@ -19,7 +19,7 @@ class Solution:
     
     #709
     def toLowerCase(self, str: str) -> str:
-        return str.lower();
+        return str.lower()
 
     #1252
     def oddCells(self, n: int, m: int, indices: List[List[int]]) -> int:
@@ -180,7 +180,7 @@ class Solution:
     
     #832
     def flipAndInvertImage(self, A: List[List[int]]) -> List[List[int]]:
-         result = []
+        result = []
         for list in A:
             list.reverse()
             temp = []
@@ -214,7 +214,7 @@ class Solution:
 
     #657
     def judgeCircle(self, moves: str) -> bool:
-         x=y = 0
+        x=y = 0
         for move in moves:
             if move == 'U':
                 y+=1
@@ -448,7 +448,7 @@ class Solution:
         def recursion (check: bool, root: TreeNode):
             if root.val != value:
                 return check & False
-            if root.left = None and root.right = None:
+            if root.left == None and root.right == None:
                 return
             else:
                 return recursion(check, root.left) & recursion(check, root.right)
@@ -502,6 +502,143 @@ class Solution:
         return result
                     
 
-          
+    #1380
+    def luckyNumbers (self, matrix: List[List[int]]) -> List[int]:
+        result = []
+        minL = []
+        maxL = []
+        for row in matrix:
+            minL.append(min(row))
+        tran = [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
+        for column in tran:
+            maxL.append(max(column))
+        for num in minL:
+            if num in maxL:
+                result.append(num)
+        return result
 
+    #1356
+    def sortByBits(self, arr: List[int]) -> List[int]:
+        binL = [bin(arr[i]) for i in range (len(arr))]
+        dic={}
+        result = []
+        for i in range (len(arr)):
+            numOne = binL[i].count("1")
+            if (numOne not in dic):
+                dic[numOne] = []
+                dic[numOne].append(arr[i])
+            else:
+                dic[numOne].append(arr[i])
+        for i in sorted(dic.keys()):
+            for num in sorted(dic[i]):
+                result.append(num)
+        return result
 
+    #1337
+    def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
+        temp = [i.count(1) for i in mat]
+        dic ={}
+        result =[]
+        for i in range (len(temp)):
+            if (temp[i] not in dic):
+                dic[temp[i]] = []
+            dic[temp[i]].append(i)   
+        for i in sorted(dic.keys()):
+            for num in sorted(dic[i]):
+                result.append(num)
+        return result[0:k]           
+
+    #876
+    def middleNode(self, head: ListNode) -> ListNode:
+        counter = 0
+        temp = head
+        while temp is not None:
+            counter +=1
+            temp = temp.next
+        
+        for i in range (int(counter/2)):
+            head = head.next
+        return head
+    
+    #509 memoization
+    def fib(self, N: int) -> int:
+        if N == 0:
+            return 0
+        if N == 1:
+            return 1
+        result = []
+        result.append(0)
+        result.append(1)
+        for i in range (2,N+1):
+            result.append(result[i-1]+ result[i-2])
+        return result[N]
+    
+    #1200
+    def minimumAbsDifference(self, arr: List[int]) -> List[List[int]]:
+        dic = {}
+        arr.sort()
+        for i in range (len(arr)-1):
+            diff = (arr[i+1] - arr[i]) if (arr[i+1] - arr[i]) >= 0 else -(arr[i+1] - arr[i])
+            if (diff not in dic):
+                dic[diff] = []
+            opt =[]
+            opt.append(arr[i])
+            opt.append(arr[i+1])
+            dic[diff].append(sorted(opt))
+        return dic[list(sorted(dic.keys()))[0]]
+
+    #1394
+    def findLucky(self, arr: List[int]) -> int:
+        result = []
+        for num in arr:
+            if num == arr.count(num):
+                result.append(num)
+        if len(result) == 0:
+            return -1
+        return max(result)
+
+    #344
+    def reverseString(self, s: List[str]) -> None:
+
+        s[:] = [s[-i] for i in range(1,len(s)+1)]
+    
+    #821
+    def shortestToChar(self, S, C):
+        """
+        :type S: str
+        :type C: str
+        :rtype: List[int]
+        """
+        counter = 1
+        leftR =[]
+        for char in S:
+            if char != C:
+                leftR.append(counter)
+                counter+=1
+            else:
+                leftR.append(0)
+                counter = 1
+        counter = 1
+        rightL = []
+        for char in range(len(S)-1,-1,-1):
+            if S[char] != C:
+                rightL.append(counter)
+                counter+=1
+            else:
+                rightL.append(0)
+                counter = 1
+        result = []
+        rightL.reverse()
+        record = []
+        for i in range (len(rightL)):
+            if rightL[i] == 0:
+                record.append(i)
+        for i in range(len(record)):
+            if i == 0:
+                result[:record[i]+1] = rightL[:record[i]+1]
+            if i == len(record)-1:
+                result[record[i]:] = leftR[record[i]:]
+            else:
+                for j in range (record[i]+1,record[i+1]+1):
+                    result.append(min(leftR[j],rightL[j]))
+        return result

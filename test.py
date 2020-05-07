@@ -82,56 +82,46 @@ def replaceElements(arr):
             arr[i] = max(arr[(i+1):])
         return arr
     
-def flipAndInvertImage(A):
-        # result = []
-        # for list in A:
-        #     list.reverse()
-        #     for i in range (len(list)):
-        #         if list[i] == 0:
-        #             list[i] == 1
-        #         else:
-        #             list[i] == 0
-
-        #     result.append(list)
-        # return result
-    result = []
-    dic = {}
-    for char in A[0]:
-        if char not in dic:
-            dic[char] = A[0].count(char)
-    for i in range(1,len(A)):
-        print(A[i])
-        for char in A[i]:
-            if char in dic:
-                print("Before:" + str(min(dic[char],A[i].count(char))))
-                dic[char] = min(dic[char],A[i].count(char))
-                print("After:" +str(dic[char]))
-            for chr in dic:
-                if chr not in A[i]:
-                    dic[chr] = 0
-        print("**********")
-    for char in dic:
-        for i in range (0,dic[char]):
-            result.append(char)
-    return result
-
-#1002
-# def commonChars(self, A: List[str]):
-#     result = []
-#     dic = {}
-#     for char in A[0]:
-#         if char not in dic:
-#             dic[char] = A[0].count(char)
-#     for i in range(1,len(A)-1):
-#         print(A[i])
-#         for char in A[i]:
-#             if char in dic:
-#                 print("Before:"+ min(dic[char],A[i].count(char)))
-#                 dic[char] = min(dic[char],A[i].count(char))
-#                 print("After:"+ dic[char])
-#     for char in dic:
-#         for i in range (0,dic[char]):
-#             result.append(char)
-#     return result
-print(flipAndInvertImage(["cool","lock","cook"]))
+def flipAndInvertImage(S,C):
+        counter = 1
+        leftR =[]
+        for char in S:
+            if char != C:
+                leftR.append(counter)
+                counter+=1
+            else:
+                leftR.append(0)
+                counter = 1
+        print("leftR")
+        print(leftR)
+        counter = 1
+        rightL = []
+        for char in range(len(S)-1,-1,-1):
+            if S[char] != C:
+                rightL.append(counter)
+                counter+=1
+            else:
+                rightL.append(0)
+                counter = 1
+        result = []
+        rightL.reverse()
+        print("rightL")
+        print(rightL)
+        record = []
+        for i in range (len(rightL)):
+            if rightL[i] == 0:
+                record.append(i)
+        for i in range(len(record)):
+            if i == 0:
+                result[:record[i]+1] = rightL[:record[i]+1]
+                print(result)
+            if i == len(record)-1:
+                result[record[i]:] = leftR[record[i]:]
+            else:
+                for j in range (record[i]+1,record[i+1]+1):
+                    # print(leftR[j])
+                    result.append(min(leftR[j],rightL[j]))
+        return result
+print("result")
+print(flipAndInvertImage("loveleetcode","e"))
 # print(commonChars(["bella","label","roller"]))
