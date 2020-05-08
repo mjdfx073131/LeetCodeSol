@@ -642,3 +642,30 @@ class Solution:
                 for j in range (record[i]+1,record[i+1]+1):
                     result.append(min(leftR[j],rightL[j]))
         return result
+    
+    #1022
+    def sumRootToLeaf(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        binNum = []   
+        def findPath(self, root):
+            if root is None:
+                return
+            else 
+    
+    #476
+    def findComplement(self, num):
+        """
+        :type num: int
+        :rtype: int
+        """
+        binNum = (bin(num)).replace("0b","")
+        result = ""
+        for digit in binNum:
+            if (digit == "1"):
+                result += "0"
+            else:
+                result += "1"
+        return int(result,2)

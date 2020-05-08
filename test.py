@@ -82,46 +82,20 @@ def replaceElements(arr):
             arr[i] = max(arr[(i+1):])
         return arr
     
-def flipAndInvertImage(S,C):
-        counter = 1
-        leftR =[]
-        for char in S:
-            if char != C:
-                leftR.append(counter)
-                counter+=1
+def flipAndInvertImage(num):
+        binNum = (bin(num)).replace("0b","")
+        print(binNum)
+        result = ""
+        for digit in binNum:
+            print(type(digit))
+            if (digit == "1"):
+                result += "0"
+                print("reach here 0")
             else:
-                leftR.append(0)
-                counter = 1
-        print("leftR")
-        print(leftR)
-        counter = 1
-        rightL = []
-        for char in range(len(S)-1,-1,-1):
-            if S[char] != C:
-                rightL.append(counter)
-                counter+=1
-            else:
-                rightL.append(0)
-                counter = 1
-        result = []
-        rightL.reverse()
-        print("rightL")
-        print(rightL)
-        record = []
-        for i in range (len(rightL)):
-            if rightL[i] == 0:
-                record.append(i)
-        for i in range(len(record)):
-            if i == 0:
-                result[:record[i]+1] = rightL[:record[i]+1]
-                print(result)
-            if i == len(record)-1:
-                result[record[i]:] = leftR[record[i]:]
-            else:
-                for j in range (record[i]+1,record[i+1]+1):
-                    # print(leftR[j])
-                    result.append(min(leftR[j],rightL[j]))
-        return result
+                result += "1"
+                print("reach here 1")
+        print(result)
+        return int(result,2)
 print("result")
-print(flipAndInvertImage("loveleetcode","e"))
+print(flipAndInvertImage(5))
 # print(commonChars(["bella","label","roller"]))
