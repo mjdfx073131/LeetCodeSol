@@ -668,4 +668,48 @@ class Solution:
                 result += "0"
             else:
                 result += "1"
-        return int(result,2)
+        return int(result,2);
+    
+    #500
+    def findWords(self, words):
+        """
+        :type words: List[str]
+        :rtype: List[str]
+        """
+        topRow=list("qwertyuiop")
+        middleRow = list("asdfghjkl")
+        bottomRow = list("zxcvbnm")
+        result = []
+        for word in words:
+            topCheck = 0
+            middleCheck = 0
+            bottomCheck = 0
+            for char in word:
+                if char.lower() in topRow:
+                    topCheck +=1
+                elif char.lower() in middleRow:
+                    middleCheck +=1
+                else:
+                    bottomCheck +=1
+            if ((topCheck or middleCheck or bottomCheck) == len(word)):
+                result.append(word)
+        return result
+    
+    #766
+    def isToeplitzMatrix(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: bool
+        """
+        m = len(matrix) - 1 # for row index use
+        result = True 
+        for n in range (1, len(matrix[0])):
+            sum = 0
+            for i in range (0,n+1):
+              sum += matrix[m-i][n-i]
+            print(sum)
+            if (sum/ matrix[m][n] == n-1):
+                result = result and True
+            else:
+                return False
+        return result

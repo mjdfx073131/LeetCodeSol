@@ -82,20 +82,43 @@ def replaceElements(arr):
             arr[i] = max(arr[(i+1):])
         return arr
     
-def flipAndInvertImage(num):
-        binNum = (bin(num)).replace("0b","")
-        print(binNum)
-        result = ""
-        for digit in binNum:
-            print(type(digit))
-            if (digit == "1"):
-                result += "0"
-                print("reach here 0")
-            else:
-                result += "1"
-                print("reach here 1")
-        print(result)
-        return int(result,2)
+def flipAndInvertImage(matrix):
+    bottomM = len(matrix) - 1 # for row index use
+    result = True 
+    for n in range (1, len(matrix[0])-1):
+        sum = 0
+        print("current column:" + str(n))
+        for i in range (0,n+1):
+            print(matrix[bottomM-i][n-i])
+            if (i >= bottomM+1):
+                print("reach break")
+                break
+            sum += matrix[bottomM-i][n-i]
+        print(sum)
+        if (sum / matrix[bottomM][n] == n+1):
+            result = result and True
+            print("reach true")
+        else:
+            result = result and False
+            print("reach false")
+    print("finish bottom")
+    m = 0
+    for n in range (len(matrix[0])-2, 0,-1):
+        sum = 0
+        print("current column:" + str(n))
+        for i in range (0,bottomM-n+2):
+            #print(matrix[m+i][n+i])
+            if (i >= bottomM+1):
+                print("reach break")
+                break
+            sum += matrix[m+i][n+i]
+        if (sum / (bottomM+1 - n+1) == matrix[m][n]):
+            result = result and True
+            print("reach true")
+        else:
+            result = result and False
+            print("reach false")
+    return result
 print("result")
-print(flipAndInvertImage(5))
+print(flipAndInvertImage([[1,2],[2,2]]))
 # print(commonChars(["bella","label","roller"]))
