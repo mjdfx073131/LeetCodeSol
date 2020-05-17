@@ -643,18 +643,6 @@ class Solution:
                     result.append(min(leftR[j],rightL[j]))
         return result
     
-    #1022
-    def sumRootToLeaf(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
-        binNum = []   
-        def findPath(self, root):
-            if root is None:
-                return
-            else 
-    
     #476
     def findComplement(self, num):
         """
@@ -668,7 +656,7 @@ class Solution:
                 result += "0"
             else:
                 result += "1"
-        return int(result,2);
+        return int(result,2)
     
     #500
     def findWords(self, words):
@@ -701,15 +689,98 @@ class Solution:
         :type matrix: List[List[int]]
         :rtype: bool
         """
-        m = len(matrix) - 1 # for row index use
-        result = True 
-        for n in range (1, len(matrix[0])):
-            sum = 0
-            for i in range (0,n+1):
-              sum += matrix[m-i][n-i]
-            print(sum)
-            if (sum/ matrix[m][n] == n-1):
-                result = result and True
+        # bottomM = len(matrix) - 1 # for row index use
+        # result = True
+        # if(bottomM / 2 == 0):
+        #     for n in range (1, len(matrix[0])-1):
+        #         sum = 0
+        #         print("current column:" + str(n))
+        #         for i in range (0,n+1):
+        #             print(matrix[bottomM-i][n-i])
+        #             if (i >= bottomM+1):
+        #                 print("reach break")
+        #                 break
+        #             sum += matrix[bottomM-i][n-i]
+        #         print(sum)
+        #         if (sum / matrix[bottomM][n] == n+1):
+        #             result = result and True
+        #             print("reach true")
+        #         else:
+        #             result = result and False
+        #             print("reach false")
+        #     print("finish bottom")
+        #     m = 0
+        #     for n in range (len(matrix[0])-2, 0,-1):
+        #         sum = 0
+        #         print("current column:" + str(n))
+        #         for i in range (0,bottomM-n+2):
+        #             #print(matrix[m+i][n+i])
+        #             if (i >= bottomM+1):
+        #                 print("reach break")
+        #                 break
+        #             sum += matrix[m+i][n+i]
+        #         if (sum / (bottomM+1 - n+1) == matrix[m][n]):
+        #             result = result and True
+        #             print("reach true")
+        #         else:
+        #             result = result and False
+        #             print("reach false")
+        # else:
+        #     for n in range (1, len(matrix[0])):
+        #         sum = 0
+        #         print("current column:" + str(n))
+        #         for i in range (0,n+1):
+        #             print(matrix[bottomM-i][n-i])
+        #             sum += matrix[bottomM-i][n-i]
+        #         print(sum)
+        #         if (sum / matrix[bottomM][n] == n+1):
+        #             result = result and True
+        #             print("reach true")
+        #         else:
+        #             result = result and False
+        #             print("reach false")
+        #     print("finish bottom")
+        #     m = 0
+        #     for n in range (len(matrix[0])-2, 0,-1):
+        #         sum = 0
+        #         print("current column:" + str(n))
+        #         for i in range (0,bottomM-n+2):
+        #             #print(matrix[m+i][n+i])
+        #             if (i >= bottomM+1):
+        #                 print("reach break")
+        #                 break
+        #             sum += matrix[m+i][n+i]
+        #         if (sum / (bottomM+1 - n+1) == matrix[m][n]):
+        #             result = result and True
+        #             print("reach true")
+        #         else:
+        #             result = result and False
+        #             print("reach false")
+        # return result
+        rowNum, columnNum = len(matrix), len(matrix[0])
+        for row in range (rowNum-1):
+            for column in range (columnNum -1):
+                if matrix[row][column] != matrix[row+1][column+1]:
+                    return False
+        return True
+
+    #1446
+    def maxPower(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        if (len(s) == 0):
+            return 0
+        if (len(s) ==1):
+            return 1
+        arr =[]
+        result = 1
+        for i in range (1, len(s)):
+            if(s[i] == s[i-1]):
+                result += 1
+                arr.append(result)
             else:
-                return False
-        return result
+                arr.append(result)
+                result =1
+        return max(arr)
