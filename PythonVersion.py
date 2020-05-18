@@ -784,3 +784,25 @@ class Solution:
                 arr.append(result)
                 result =1
         return max(arr)
+
+    #463
+    def islandPerimeter(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+        """ 
+        if not grid: return 0
+        m, n = len(grid), len(grid[0])
+        res = 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] > 0:
+                    edge = 4
+                    for a, b in [[i-1, j], [i+1, j], [i, j-1], [i, j+1]]:
+                        if 0 <= a < m and 0 <= b < n and grid[a][b] > 0:
+                            edge -= 1
+                    res += edge
+        return res
+                        
+
+
