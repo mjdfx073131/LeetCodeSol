@@ -1,61 +1,61 @@
-#1309
+# 1309
 def freqAlphabets(s: str) -> str:
     result = ''
-    for i in range (0,len(s)):
+    for i in range(0, len(s)):
         print(s[i])
         if (s[i] == '1' and i < len(s)-2 and s[i+2] == '#'):
             if (s[i+1] == '0'):
                 result += 'j'
-                i+=2
+                i += 2
             elif s[i+1] == '1':
                 result += 'k'
-                i+=2
+                i += 2
             elif s[i+1] == '2':
                 result += 'l'
-                i+=2
+                i += 2
             elif s[i+1] == '3':
                 result += 'm'
-                i+=2
+                i += 2
             elif s[i+1] == '4':
                 result += 'n'
-                i+=2
+                i += 2
             elif s[i+1] == '5':
                 result += 'o'
-                i+=2
+                i += 2
             elif s[i+1] == '6':
                 result += 'p'
-                i+=2
+                i += 2
             elif s[i+1] == '7':
                 result += 'q'
-                i+=2
+                i += 2
             elif s[i+1] == '8':
                 result += 'r'
-                i+=2
+                i += 2
             elif s[i+1] == '9':
                 result += 's'
-                i+=2
-        elif (s[i] == '2' and i <len(s)-2 and s[i+2] == '#'):
+                i += 2
+        elif (s[i] == '2' and i < len(s)-2 and s[i+2] == '#'):
             if s[i+1] == '0':
                 result += 't'
-                i+=2
+                i += 2
             elif s[i+1] == '1':
                 result += 'u'
-                i+=2
+                i += 2
             elif s[i+1] == '2':
                 result += 'v'
-                i+=2
+                i += 2
             elif s[i+1] == '3':
                 result += 'w'
-                i+=2
+                i += 2
             elif s[i+1] == '4':
                 result += 'x'
-                i+=2
+                i += 2
             elif s[i+1] == '5':
                 result += 'y'
-                i+=2
+                i += 2
             elif s[i+1] == '6':
                 result += 'z'
-                i+=2
+                i += 2
         else:
             if s[i] == '1':
                 result += 'a'
@@ -76,49 +76,39 @@ def freqAlphabets(s: str) -> str:
             elif s[i] == '9':
                 result += 'i'
     return result
-#1299
+# 1299
+
+
 def replaceElements(arr):
-        for i in range (len(arr)):
-            arr[i] = max(arr[(i+1):])
-        return arr
-    
-def flipAndInvertImage(matrix):
-    bottomM = len(matrix) - 1 # for row index use
-    result = True 
-    for n in range (1, len(matrix[0])-1):
-        sum = 0
-        print("current column:" + str(n))
-        for i in range (0,n+1):
-            print(matrix[bottomM-i][n-i])
-            if (i >= bottomM+1):
-                print("reach break")
-                break
-            sum += matrix[bottomM-i][n-i]
-        print(sum)
-        if (sum / matrix[bottomM][n] == n+1):
-            result = result and True
-            print("reach true")
+    for i in range(len(arr)):
+        arr[i] = max(arr[(i+1):])
+    return arr
+
+
+def flipAndInvertImage(text, first, second):
+    result = []
+    count = 0
+    print(text.split(" "))
+    for word in text.split(" "):
+        print(word)
+        if (count == 2):
+            result.append(word)
+            count = 0
+        if (word == first):
+            count = 1
+            print("hit first")
+        elif (word == second and count == 1):
+            count = 2
+            print("hit second")
         else:
-            result = result and False
-            print("reach false")
-    print("finish bottom")
-    m = 0
-    for n in range (len(matrix[0])-2, 0,-1):
-        sum = 0
-        print("current column:" + str(n))
-        for i in range (0,bottomM-n+2):
-            #print(matrix[m+i][n+i])
-            if (i >= bottomM+1):
-                print("reach break")
-                break
-            sum += matrix[m+i][n+i]
-        if (sum / (bottomM+1 - n+1) == matrix[m][n]):
-            result = result and True
-            print("reach true")
-        else:
-            result = result and False
-            print("reach false")
+            print("hit else")
+            count = 0
+        print(str(count))
     return result
+
+
 print("result")
-print(flipAndInvertImage([[1,2],[2,2]]))
+print(flipAndInvertImage("jkypmsxd jkypmsxd kcyxdfnoa jkypmsxd kcyxdfnoa jkypmsxd kcyxdfnoa kcyxdfnoa jkypmsxd kcyxdfnoa"
+,"kcyxdfnoa"
+,"jkypmsxd"))
 # print(commonChars(["bella","label","roller"]))

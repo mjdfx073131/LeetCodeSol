@@ -804,5 +804,37 @@ class Solution:
                     res += edge
         return res
                         
+    #1078  Occurrences After Bigram
+    def findOcurrences(self, text, first, second):
 
+        """
+        :type text: str
+        :type first: str
+        :type second: str
+        :rtype: List[str]
+        """
+        result = []
+        count = 0
+        print(text.split(" "))
+        for word in text.split(" "):
+            print(word)
+            if (count == 2):
+                result.append(word)
+                if (word == first):
+                    count =1
+                else:
+                    count = 0
+                continue
+            if (word == first):
+                count = 1
+                print("hit first")
+            elif (word == second and count == 1):
+                count = 2
+                print("hit second")
+            else:
+                print("hit else")
+                count = 0
+            print(str(count))
+        return result
+    
 
