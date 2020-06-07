@@ -838,3 +838,42 @@ class Solution:
         return result
     
 
+    #784
+    def letterCasePermutation(self, S):
+        """
+        :type S: str
+        :rtype: List[str]
+        """
+        result = []
+        def recursion(currStr, idx):
+            if (idx == len(S)-1):
+                if (S[idx].isdigit()):
+                    result.append(currStr+S[idx])
+                    return
+                if (S[idx].isalpha()):
+                    result.append(currStr+S[idx])
+                    result.append(currStr+S[idx].swapcase())
+                    return
+            else:
+                if (S[idx].isdigit()):
+                    currStr+=S[idx]
+                    idx+=1
+                    recursion(currStr, idx)
+                elif (S[idx].isalpha()):
+                    copyStr = currStr
+                    currStr +=S[idx]
+                    copyStr +=S[idx].swapcase()
+                    idx+=1
+                    recursion(currStr, idx)
+                    recursion(copyStr, idx)
+
+        recursion("", 0)
+        return result
+
+    #226
+    def invertTree(self, root):
+        """
+        :type root: TreeNode
+        :rtype: TreeNode
+        """
+        

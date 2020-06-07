@@ -85,30 +85,34 @@ def replaceElements(arr):
     return arr
 
 
-def flipAndInvertImage(text, first, second):
+def flipAndInvertImage(S):
     result = []
-    count = 0
-    print(text.split(" "))
-    for word in text.split(" "):
-        print(word)
-        if (count == 2):
-            result.append(word)
-            count = 0
-        if (word == first):
-            count = 1
-            print("hit first")
-        elif (word == second and count == 1):
-            count = 2
-            print("hit second")
+    def recursion(currStr, idx):
+        if (idx == len(S)-1):
+            if (S[idx].isdigit()):
+                result.append(currStr+S[idx])
+                return
+            if (S[idx].isalpha()):
+                result.append(currStr+S[idx])
+                result.append(currStr+S[idx].swapcase())
+                return
         else:
-            print("hit else")
-            count = 0
-        print(str(count))
+            if (S[idx].isdigit()):
+                currStr+=S[idx]
+                idx+=1
+                recursion(currStr, idx)
+            elif (S[idx].isalpha()):
+                copyStr = currStr
+                currStr +=S[idx]
+                copyStr +=S[idx].swapcase()
+                idx+=1
+                recursion(currStr, idx)
+                recursion(copyStr, idx)
+
+    recursion("", 0)
     return result
 
 
 print("result")
-print(flipAndInvertImage("jkypmsxd jkypmsxd kcyxdfnoa jkypmsxd kcyxdfnoa jkypmsxd kcyxdfnoa kcyxdfnoa jkypmsxd kcyxdfnoa"
-,"kcyxdfnoa"
-,"jkypmsxd"))
+print(flipAndInvertImage("a1b2"))
 # print(commonChars(["bella","label","roller"]))
