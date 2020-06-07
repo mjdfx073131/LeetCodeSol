@@ -870,10 +870,105 @@ class Solution:
         recursion("", 0)
         return result
 
+    #1470
+    def shuffle(self, nums, n):
+        """
+        :type nums: List[int]
+        :type n: int
+        :rtype: List[int]
+        """
+        result = []
+        for i in range (0, n):
+            result.append(nums[i])
+            result.append(nums[n+i])
+        return result
+    
+    #1342
+    def numberOfSteps (self, num):
+        """
+        :type num: int
+        :rtype: int
+        """ 
+        step = 0
+        while (num != 0):
+            if num % 2 == 0:
+                num /= 2
+            else:
+                num -= 1
+            step +=1
+        return step
+    
+    #1365
+    def smallerNumbersThanCurrent(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        result = []
+        for num in nums:
+            count = 0
+            for i in range (0,len(nums)):
+                if num != nums[i] and num > nums[i]:
+                    count +=1
+            result.append(count)
+        return result
+                
+    #1431
+    def kidsWithCandies(self, candies, extraCandies):
+        """
+        :type candies: List[int]
+        :type extraCandies: int
+        :rtype: List[bool]
+        """
+        result = []
+        for candy in candies:
+            if (candy + extraCandies) >= max(candies):
+                result.append(True)
+            else:
+                result.append(False)
+        return result
+
+    #1313
+    def decompressRLElist(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        result = []
+        for i in range (0, len(nums)-1,2):
+            for j in range (0, nums[i]):
+                result.append(nums[i+1])
+        return result    
+    
+    #1389
+    def createTargetArray(self, nums, index):
+        """
+        :type nums: List[int]
+        :type index: List[int]
+        :rtype: List[int]
+        """
+        result = []
+        for i in range (0,len(nums)):
+            result.insert(index[i], nums[i])
+        return result
+    
+    #1450
+    def busyStudent(self, startTime, endTime, queryTime):
+        """
+        :type startTime: List[int]
+        :type endTime: List[int]
+        :type queryTime: int
+        :rtype: int
+        """
+        result = 0
+        for i in range (0, len(startTime)):
+            if startTime[i] <= queryTime <= endTime[i]:
+                result +=1
+        return result
+    
     #226
     def invertTree(self, root):
         """
         :type root: TreeNode
         :rtype: TreeNode
         """
-        
