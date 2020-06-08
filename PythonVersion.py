@@ -464,7 +464,7 @@ class Solution:
                 return recursion(check, root.left) & recursion(check, root.right)
         recursion(check, root)
         return check
-    
+
     # 1160
     def countCharacters(self, words: List[str], chars: str) -> int:
         result = 0
@@ -991,10 +991,30 @@ class Solution:
             for j in range(i+1, len(nums)):
                 result.append((nums[i]-1) * (nums[j]-1))
         return max(result)
-    # 226
 
+    # 226 Thumb up
     def invertTree(self, root):
         """
         :type root: TreeNode
         :rtype: TreeNode
         """
+        if (root == None) :
+            return root
+        result = TreeNode (root.val)
+        def recursion (curr, result):
+            if (curr.left == None and curr.right == None):
+                result = TreeNode(curr.val)
+                return
+            else:
+                if (curr.left != None):
+                    result.right = TreeNode(curr.left.val)
+                    #result.val = curr.val
+                    recursion(curr.left, result.right)
+                #print(curr)
+                if (curr.right != None):
+                    #print(curr.right.val)
+                    result.left = TreeNode(curr.right.val)
+                    #result.val = curr.val 
+                    recursion (curr.right, result.left)
+        recursion(root, result)
+        return result   
