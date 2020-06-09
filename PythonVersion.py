@@ -992,7 +992,7 @@ class Solution:
                 result.append((nums[i]-1) * (nums[j]-1))
         return max(result)
 
-    # 226 Thumb up
+    # 226 Thumb up   invert Tree
     def invertTree(self, root):
         """
         :type root: TreeNode
@@ -1019,3 +1019,87 @@ class Solution:
                     recursion(curr.right, result.left)
         recursion(root, result)
         return result
+
+    # 682
+    def calPoints(self, ops):
+        """
+        :type ops: List[str]
+        :rtype: int
+        """
+        totalSum = 0
+        nums = []
+        for op in ops:
+            if op == "C":
+                totalSum -= nums[len(nums)-1]
+                score = nums.pop()
+            elif op == "D":
+                score = 2 * nums[len(nums)-1]
+                nums.append(score)
+                totalSum += score
+            elif op == "+":
+                score = nums[len(nums)-1] + nums[len(nums)-2]
+                nums.append(score)
+                totalSum += score
+            else:
+                nums.append(int(op))
+                totalSum += int(op)
+        return totalSum
+
+    # 496
+    def nextGreaterElement(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        result = []
+        if(len(nums2) == 0):
+            return result
+        dic = {}
+        for i in range(len(nums2)-1):
+            key = nums2[i]
+            for j in range(i+1, len(nums2)):
+                if (nums2[j] > key):
+                    dic[key] = nums2[j]
+                    break
+                else:
+                    dic[key] = -1
+        dic[nums2[len(nums2)-1]] = -1
+        for num in nums1:
+            result.append(dic[num])
+        return result
+
+    # 867
+    def transpose(self, A):
+        """
+        :type A: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        tran = [[A[j][i]
+                 for j in range(len(A))] for i in range(len(A[0]))]
+        return tran
+
+    #824
+    def toGoatLatin(self, S):
+        """
+        :type S: str
+        :rtype: str
+        """
+        words = S.split(" ")
+        result =""
+        vowels = ["a","e","i","o","u"]
+        for i in range (len(words)):
+            word = words[i]
+            if(word[0].lower() in vowels):
+                word += "ma"
+                word += ("a"*(i+1))
+                if (i != len(words)-1):
+                    word += " "
+                result +=word
+            else:
+                newWord = word[1: ] + word[0] + "ma" + "a"*(i+1)
+                if (i != len(words)-1):
+                    newWord += " "
+                result +=newWord
+        return result
+            
