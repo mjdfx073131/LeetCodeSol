@@ -998,10 +998,11 @@ class Solution:
         :type root: TreeNode
         :rtype: TreeNode
         """
-        if (root == None) :
+        if (root == None):
             return root
-        result = TreeNode (root.val)
-        def recursion (curr, result):
+        result = TreeNode(root.val)
+
+        def recursion(curr, result):
             if (curr.left == None and curr.right == None):
                 result = TreeNode(curr.val)
                 return
@@ -1010,11 +1011,11 @@ class Solution:
                     result.right = TreeNode(curr.left.val)
                     #result.val = curr.val
                     recursion(curr.left, result.right)
-                #print(curr)
+                # print(curr)
                 if (curr.right != None):
-                    #print(curr.right.val)
+                    # print(curr.right.val)
                     result.left = TreeNode(curr.right.val)
-                    #result.val = curr.val 
-                    recursion (curr.right, result.left)
+                    #result.val = curr.val
+                    recursion(curr.right, result.left)
         recursion(root, result)
-        return result   
+        return result
