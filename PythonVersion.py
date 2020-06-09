@@ -992,16 +992,16 @@ class Solution:
                 result.append((nums[i]-1) * (nums[j]-1))
         return max(result)
 
-    # 226 Thumb up
+    # 226 Thumb up   invert Tree
     def invertTree(self, root):
         """
         :type root: TreeNode
         :rtype: TreeNode
         """
-        if (root == None) :
+        if (root == None):
             return root
-        result = TreeNode (root.val)
-        def recursion (curr, result):
+        result = TreeNode(root.val)
+        def recursion(curr, result):
             if (curr.left == None and curr.right == None):
                 result = TreeNode(curr.val)
                 return
@@ -1010,11 +1010,60 @@ class Solution:
                     result.right = TreeNode(curr.left.val)
                     #result.val = curr.val
                     recursion(curr.left, result.right)
-                #print(curr)
+                # print(curr)
                 if (curr.right != None):
-                    #print(curr.right.val)
+                    # print(curr.right.val)
                     result.left = TreeNode(curr.right.val)
-                    #result.val = curr.val 
-                    recursion (curr.right, result.left)
+                    #result.val = curr.val
+                    recursion(curr.right, result.left)
         recursion(root, result)
-        return result   
+        return result
+
+    #682
+    def calPoints(self, ops):
+        """
+        :type ops: List[str]
+        :rtype: int
+        """
+        totalSum = 0
+        nums = []
+        for op in ops:
+            if op == "C":
+                totalSum -= nums[len(nums)-1]
+                score = nums.pop()
+            elif op == "D":
+                score = 2* nums[len(nums)-1]
+                nums.append(score)
+                totalSum += score
+            elif op ==  "+":
+                score = nums[len(nums)-1] + nums[len(nums)-2]
+                nums.append(score)
+                totalSum += score
+            else:
+                nums.append(int(op))
+                totalSum += int(op)
+        return totalSum
+    
+    #496
+    def nextGreaterElement(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        result = []
+        if(len(nums2) == 0):
+            return result
+        dic = {}
+        for i in range(len(nums2)-1):
+            key = nums2[i]
+            for j in range(i+1, len(nums2)):
+                if (nums2[j] > key):
+                    dic[key] = nums2[j]
+                    break
+                else:
+                    dic[key] = -1
+        dic[nums2[len(nums2)-1]] = -1
+        for num in nums1:
+            result.append(dic[num])
+        return result

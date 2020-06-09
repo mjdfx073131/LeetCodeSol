@@ -85,34 +85,23 @@ def replaceElements(arr):
     return arr
 
 
-def flipAndInvertImage(S):
+def flipAndInvertImage(nums1, nums2):
     result = []
-    def recursion(currStr, idx):
-        if (idx == len(S)-1):
-            if (S[idx].isdigit()):
-                result.append(currStr+S[idx])
-                return
-            if (S[idx].isalpha()):
-                result.append(currStr+S[idx])
-                result.append(currStr+S[idx].swapcase())
-                return
-        else:
-            if (S[idx].isdigit()):
-                currStr+=S[idx]
-                idx+=1
-                recursion(currStr, idx)
-            elif (S[idx].isalpha()):
-                copyStr = currStr
-                currStr +=S[idx]
-                copyStr +=S[idx].swapcase()
-                idx+=1
-                recursion(currStr, idx)
-                recursion(copyStr, idx)
-
-    recursion("", 0)
+    dic = {}
+    for i in range(len(nums2)-1):
+        key = nums2[i]
+        for j in range(i+1, len(nums2)):
+            if (nums2[j] > key):
+                dic[key] = nums2[j]
+                break
+            else:
+                dic[key] = -1
+    dic[nums2[len(nums2)-1]] = -1
+    for num in nums1:
+        result.append(dic[num])
     return result
 
 
 print("result")
-print(flipAndInvertImage("a1b2"))
+print(flipAndInvertImage([4, 1, 2], [1, 3, 4, 2]))
 # print(commonChars(["bella","label","roller"]))
