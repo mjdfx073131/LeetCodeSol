@@ -93,24 +93,13 @@ def replaceElements(arr):
     return arr
 
 
-def flipAndInvertImage(root):
-    global maxDiameter = 0
-    def recursion(currRoot):
-        maxLeft = 0
-        maxRight = 0
-        if(currRoot.left == None and currRoot.right == None):
-            return 0
-        else:
-            maxLeft = recursion(currRoot.left)
-            maxRight = recursion(currRoot.right)
-            diameter = maxLeft + maxRight
-            maxDiameter = max ((global)maxDiameter, diameter)
-            return max (1+maxLeft, 1+maxRight)
-        
-    return maxDiameter
+def flipAndInvertImage(n):
+    if (n <= 0):
+        return 1
+    return flipAndInvertImage(n-1) + flipAndInvertImage(n-2)
 A = TreeNode(5, TreeNode(4, TreeNode(3, None,None), TreeNode(2,None,None)), TreeNode(1, None,None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
 C = TreeNode(5, TreeNode(4,None, TreeNode(3, None,None)), None)
 print("result")
-print(flipAndInvertImage(A))
+print(flipAndInvertImage(2))
 # print(commonChars(["bella","label","roller"]))

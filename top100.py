@@ -221,19 +221,35 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        diameters= []
-        def recursion (currRoot):
-            maxLeft = 0
-            maxRight = 0
-            if(currRoot.left == None and currRoot.right == None):
-                return 0
+        if root is None:
+            return 0
+        def helper(root):
+            if not root:
+                return 0,0
             else:
-                if (currRoot.left != None):
-                    maxLeft = 1 + recursion(currRoot.left)
-                if (currRoot.RIGHT != None):
-                    maxRight = 1+ recursion(currRoot.right)
-                diameter = maxLeft + maxRight
-                diameters.append(diameter)
-        recursion(root)
-        return max(diameters)
-                
+                l,ll = helper(root.left)
+                r,rr = helper(root.right)
+                return max(l,r)+1, max(l+r,ll,rr)
+        a, b = helper(root)
+        return max(a-1,b)
+
+    #70 climb stairs each time you can climb either 1 or 2 steps
+    def climbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        count = 0
+        def recursion (CurrSteps):
+            nonlocal count 
+            if n == 0:
+                count +=1
+            else:
+                if (n-1)> 0:
+                    left = CurrSteps -1
+                    recursion(left)
+                if (n-2) > 0:
+                    left = CurrSteps -2
+                    recursion (left)
+        recursion(n)
+        return count
