@@ -214,3 +214,26 @@ class Solution(object):
             elif price - minPrice > maxProfit:
                 maxProfit = price - minPrice
         return maxProfit
+
+    #543 diameter of binary tree
+    def diameterOfBinaryTree(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        diameters= []
+        def recursion (currRoot):
+            maxLeft = 0
+            maxRight = 0
+            if(currRoot.left == None and currRoot.right == None):
+                return 0
+            else:
+                if (currRoot.left != None):
+                    maxLeft = 1 + recursion(currRoot.left)
+                if (currRoot.RIGHT != None):
+                    maxRight = 1+ recursion(currRoot.right)
+                diameter = maxLeft + maxRight
+                diameters.append(diameter)
+        recursion(root)
+        return max(diameters)
+                

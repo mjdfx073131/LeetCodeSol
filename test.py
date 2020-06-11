@@ -1,3 +1,11 @@
+class TreeNode(object):
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+
 # 1309
 def freqAlphabets(s: str) -> str:
     result = ''
@@ -85,14 +93,24 @@ def replaceElements(arr):
     return arr
 
 
-def flipAndInvertImage(nums):
-    dic= {}
-    for num in nums:
-        if num not in dic:
-            dic[num] = nums.count(num)
-    print(dic.values())
-    return min(dic.values())
-
+def flipAndInvertImage(root):
+    global maxDiameter = 0
+    def recursion(currRoot):
+        maxLeft = 0
+        maxRight = 0
+        if(currRoot.left == None and currRoot.right == None):
+            return 0
+        else:
+            maxLeft = recursion(currRoot.left)
+            maxRight = recursion(currRoot.right)
+            diameter = maxLeft + maxRight
+            maxDiameter = max ((global)maxDiameter, diameter)
+            return max (1+maxLeft, 1+maxRight)
+        
+    return maxDiameter
+A = TreeNode(5, TreeNode(4, TreeNode(3, None,None), TreeNode(2,None,None)), TreeNode(1, None,None))
+B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
+C = TreeNode(5, TreeNode(4,None, TreeNode(3, None,None)), None)
 print("result")
-print(flipAndInvertImage([4,1,2,1,2]))
+print(flipAndInvertImage(A))
 # print(commonChars(["bella","label","roller"]))
