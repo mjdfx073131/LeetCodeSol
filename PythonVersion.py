@@ -1102,4 +1102,53 @@ class Solution:
                     newWord += " "
                 result +=newWord
         return result
-            
+
+    #1480
+    def runningSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """ 
+        result = []
+        for num in nums:
+            if len(result) == 0:
+                result.append(num)
+            else:
+                result.append(result[len(result)-1]+ num)
+        return result
+
+    #1512
+    def numIdenticalPairs(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        result = 0
+        for i in range (len(nums)-1):
+            for j in range(i+1, len(nums)):
+                if (nums[i] == nums[j]):
+                    result +=1
+        return result
+        
+    #1351
+    def countNegatives(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+        """
+        result = 0
+        for row in grid:
+            for i in row:
+                if i < 0:
+                    result +=1
+        return result
+    
+    #884
+    def uncommonFromSentences(self, A, B):
+        """
+        :type A: str
+        :type B: str
+        :rtype: List[str]
+        """
+
+
