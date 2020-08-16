@@ -97,9 +97,33 @@ def flipAndInvertImage(n):
     if (n <= 0):
         return 1
     return flipAndInvertImage(n-1) + flipAndInvertImage(n-2)
+
+
+def maxSubArray(nums):
+    """
+    :type nums: List[int]
+    :rtype: int
+    """
+    twoDArray = [[None for i in range(len(nums))] for i in range (len(nums))]
+    #print(twoDArray)
+    maxSum = None
+    for i in range(0, len(nums)):
+        subSum = None
+        for j in range(i, len(nums)):
+            #print(twoDArray[i][j] == None)
+            if (twoDArray[i][j] is None and subSum == None):
+                twoDArray[i][j] = nums[i]
+                subSum = twoDArray[i][j]
+            else:
+                twoDArray[i][j] = nums[j] + twoDArray[i][j-1]
+                subSum = twoDArray[i][j]
+            if (maxSum == None or twoDArray[i][j] > maxSum):
+                maxSum = twoDArray[i][j]
+    print(twoDArray)
+    return maxSum
 A = TreeNode(5, TreeNode(4, TreeNode(3, None,None), TreeNode(2,None,None)), TreeNode(1, None,None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
 C = TreeNode(5, TreeNode(4,None, TreeNode(3, None,None)), None)
 print("result")
-print(flipAndInvertImage(2))
+print(maxSubArray([-2, -1]))
 # print(commonChars(["bella","label","roller"]))

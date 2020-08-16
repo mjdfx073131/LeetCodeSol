@@ -253,3 +253,67 @@ class Solution(object):
                     recursion (left)
         recursion(n)
         return count
+    def dpClimbStairs(self, n):
+        if n < 2:
+            return n
+        dp = [0] * (n+1)
+        dp[0] = 1
+        dp[1] = 1
+
+        for i in range(2, n+1):
+            dp[i] = dp[i-1] + dp[i-2]
+
+        return dp[n]
+
+    #101. Symmetric Tree
+    def isSymmetric(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if(root == None):
+            return True
+        if(root.left == None and root.right == None):
+            return True
+        def isMirror(left, right):
+            if (left == None or right == None):
+                return left == right
+            elif (left.val != right.val):
+                return False
+            return isMirror(left.left, right.right) and isMirror(left.right, right.left)
+        return isMirror(root.left, root.right)
+
+
+    #53. Maximum Subarray
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # twoDArray = [[None for i in range(len(nums))] for i in range(len(nums))]
+        # #print(twoDArray)
+        # maxSum = None
+        # for i in range(0, len(nums)):
+        #     subSum = None
+        #     for j in range(i, len(nums)):
+        #         #print(twoDArray[i][j] == None)
+        #         if (twoDArray[i][j] is None and subSum == None):
+        #             twoDArray[i][j] = nums[i]
+        #             subSum = twoDArray[i][j]
+        #         else:
+        #             twoDArray[i][j] = nums[j] + twoDArray[i][j-1]
+        #             subSum = twoDArray[i][j]
+        #         if (maxSum == None or twoDArray[i][j] > maxSum):
+        #             maxSum = twoDArray[i][j]
+        # print(twoDArray)
+        # return maxSum
+        maxSub, curSum = nums[0], 0
+        for n in nums:
+            if curSum <0:
+                curSum = 0
+            curSum += n
+            maxSub = max(maxSub, curSum)
+        return maxSub
+
+
+        
