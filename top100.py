@@ -11,6 +11,43 @@ class ListNode(object):
         self.val = val
         self.next = next
 
+#155
+class MinStack(object):
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.n = 0
+        self.stack = []
+        self.minimum = []
+
+    def push(self, x: int) -> None:
+        if self.n == 0:
+            self.stack.append(x)
+            self.minimum.append(x)
+        else:
+            self.stack.append(x)
+            self.minimum.append(min(x, self.minimum[self.n-1]))
+
+        self.n += 1
+
+    def pop(self) -> None:
+        self.minimum.pop(-1)
+        self.n -= 1
+        return self.stack.pop(-1)
+
+    def top(self) -> int:
+        if self.n == 0:
+            return None
+        else:
+            return self.stack[self.n-1]
+
+    def getMin(self) -> int:
+        return self.minimum[self.n-1]
+
+
+
 
 class Solution(object):
     # 104 Maximum depth of binary tree
@@ -331,6 +368,23 @@ class Solution(object):
                 return[d[diff], i]
             d[num[i]] = i
 
+    #198
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        result = 0
+        for i in range (0, len(nums)):
+            idx = i
+            money = 0
+            while (idx < len(nums)):
+                money += nums[idx]
+                if (money >= result):
+                    result = money
+                idx+=2
+        return result
             
+
 
 

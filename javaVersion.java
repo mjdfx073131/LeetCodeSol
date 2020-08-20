@@ -1,5 +1,7 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Stack;
 
 
@@ -206,5 +208,40 @@ class Solution {
         map.put('d', -128);
         System.out.println(map.get('c') == map.get('d'));
         System.out.println(map.get('c').equals(map.get('d')));
+    }
+}
+
+
+class MinStack {
+
+    /** initialize your data structure here. */
+    List<Integer> stack;
+    List<Integer> minStack;
+
+    public MinStack() {
+        minStack = new ArrayList();
+    }
+
+    public void push(int x) {
+        minStack.add(x);
+    }
+
+    public void pop() {
+        minStack.remove(minStack.size()-1);
+    }
+
+    public int top() {
+        return minStack.get(minStack.size()-1);
+
+    }
+
+    public int getMin() {
+        int min  =Integer.MAX_VALUE;
+        for (int i = 0; i< minStack.size(); i++){
+            if (minStack.get(i) < min){
+                minStack.get(i);
+            }
+        }
+        return min;
     }
 }
