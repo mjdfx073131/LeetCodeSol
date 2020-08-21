@@ -121,9 +121,35 @@ def maxSubArray(nums):
                 maxSum = twoDArray[i][j]
     print(twoDArray)
     return maxSum
+
+def rob(nums):
+    """
+    :type nums: List[int]
+    :rtype: int
+    """
+    result = []
+    for i in range(0, len(nums)):
+        result.append(0)
+
+    def robHelper(result, nums, idx):
+        if (idx >= len(nums)):
+            return 0
+        if result[idx] == 0:
+            #result[idx] = nums[idx]
+            money = max(nums[idx] + robHelper(result, nums,
+                                              idx+2), robHelper(result, nums, idx+1))
+            if (money > result[idx]):
+                result[idx] = money
+            # else:
+            #     return result[j]
+        return result[idx]
+    
+    return robHelper(result, nums, 0)
+
 A = TreeNode(5, TreeNode(4, TreeNode(3, None,None), TreeNode(2,None,None)), TreeNode(1, None,None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
 C = TreeNode(5, TreeNode(4,None, TreeNode(3, None,None)), None)
 print("result")
-print(maxSubArray([-2, -1]))
+# print(maxSubArray([-2, -1]))
 # print(commonChars(["bella","label","roller"]))
+print(rob([2,11,2]))

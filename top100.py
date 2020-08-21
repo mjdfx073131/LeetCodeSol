@@ -374,17 +374,45 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        result = 0
-        for i in range (0, len(nums)):
-            idx = i
-            money = 0
-            while (idx < len(nums)):
-                money += nums[idx]
-                if (money >= result):
-                    result = money
-                idx+=2
-        return result
+        result = []
+        for i in range(0, len(nums)):
+            result.append(0)
+
+        def robHelper(result, nums, idx):
+            if (idx >= len(nums)):
+                return 0
+            if result[idx] == 0:
+                #result[idx] = nums[idx]
+                money = max(nums[idx] + robHelper(result, nums,
+                                                    idx+2), robHelper(result, nums, idx+1))
+                if (money > result[idx]):
+                    result[idx] = money
+                # else:
+                #     return result[j]
+            return result[idx]
+
+        return robHelper(result, nums, 0)
+    
+    def robDP(self, nums):
+        if (len(nums) == 0):
+            return 0
+
+        if (len(nums) == 1):
+            return nums[0]
+        result = []
+        result.append(nums[0])
+        result.append(max(result[0], nums[1]))
+        for i in range(2, len(nums)):
+            result.append(max(result[i-2] + nums[i], result[i-1]))
+        return result[-1]
             
+
+
+    
+    
+        
+
+    
 
 
 
