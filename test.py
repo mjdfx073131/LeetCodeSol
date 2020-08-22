@@ -146,10 +146,30 @@ def rob(nums):
     
     return robHelper(result, nums, 0)
 
+def findUnsortedSubarray(nums) -> int:
+    sortedArray = sorted(nums)
+    first = 0
+    last = len(nums)-1
+    while first != len(nums)-1:
+        if (nums[first] == sortedArray[first]):
+            first += 1
+        else:
+            slowest = first
+            break
+    while last != 0:
+        if (nums[last] == sortedArray[last]):
+            last -= 1
+        else:
+            largest = last
+            break
+    if(first - last == len(nums) -1):
+        return 0
+    return largest - slowest + 1
+
 A = TreeNode(5, TreeNode(4, TreeNode(3, None,None), TreeNode(2,None,None)), TreeNode(1, None,None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
 C = TreeNode(5, TreeNode(4,None, TreeNode(3, None,None)), None)
 print("result")
 # print(maxSubArray([-2, -1]))
 # print(commonChars(["bella","label","roller"]))
-print(rob([2,11,2]))
+print(findUnsortedSubarray([2, 6, 4, 8, 10, 9, 15]))

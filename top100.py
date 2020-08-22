@@ -51,7 +51,6 @@ class MinStack(object):
 
 class Solution(object):
     # 104 Maximum depth of binary tree
-
     def maxDepth(self, root):
         """
         :type root: TreeNode
@@ -392,7 +391,7 @@ class Solution(object):
             return result[idx]
 
         return robHelper(result, nums, 0)
-    
+    #198
     def robDP(self, nums):
         if (len(nums) == 0):
             return 0
@@ -407,8 +406,119 @@ class Solution(object):
         return result[-1]
             
 
+    #141 Linked List Cycle
 
+    def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        if(head == None):
+            return False
+        result = {}
+        while (head.next != None):
+            if (head not in result):
+                result[head] = False
+            else:
+                return True
+            head = head.next
+        return False
+
+    def hasCycleAnotherSolution(self, head):
+        if(head == None):
+            return False
+        slow = head
+        fast = head.next
+        while fast is not None and fast.next is not None:
+            if (slow == fast):
+                return True
+            slow = slow.next
+            fast = fast.next.next
+
+    #160 intersection of Two Linked List
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        if (headA == None or headB == None):
+            return None
+        up = headA
+        down = headB
+        result = set()
+        while up is not None:
+            result.add(up)
+            up = up.next
+        while down is not None:
+            if (down in result):
+                return down
+            down = down.next
+        return None
     
+    #234. Palindrome Linked List
+    def isPalindrome(self, head: ListNode) -> bool:
+        stack = []
+        copy = head
+        while(head != None):
+            stack.append(head.val)
+            head = head.next
+        for i in range(len(stack)-1, -1, -1):
+            if (stack[i] != copy.val):
+                return False
+            copy = copy.next
+        return True
+    
+    #20. Valid Parentheses
+    def isValid(self, s: str) -> bool:
+        stack =[]
+        for bracket in s:
+            if len(stack) == 0:
+                stack.append(bracket)
+            else:
+                if bracket == "(" or bracket == "{" or bracket=="[":
+                    stack.append(bracket)
+                elif bracket == ")":
+                    if stack[len(stack)-1] == "(":
+                        stack.pop()
+                    else:
+                        return False
+                elif bracket == "]":
+                    if stack[len(stack)-1] == "[":
+                        stack.pop()
+                    else:
+                        return False
+                elif bracket == "}":
+                    if stack[len(stack)-1] == "{":
+                        stack.pop()
+                    else:
+                        return False
+        if(len(stack) == 0):
+            return True
+        return False
+
+    #581. Shortest Unsorted Continuous Subarray
+    def findUnsortedSubarray(self, nums: List[int]) -> int:
+        sortedArray = nums.sort()
+        first = 0
+        last =len(nums)-1
+        while first != last:
+            if (nums[first] == sortedArray[first]):
+                first +=1
+                break
+        while first != last:
+            if (nums[last] == sortedArray[last]):
+                last -=1
+                break
+        if first == last:
+            return 0
+        else :
+            return last -first +1
+
+    # ***************************Medium******************************
+
+    #338.Counting Bits
+    def countBits(self, num: int) -> List[int]:
+        result = []
+        for i in range (num+1):
+            result.append(str(bin(i+1)).count("1"))
+        return result
+
     
         
 
