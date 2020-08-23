@@ -187,6 +187,21 @@ def reconstruct(people):
             result.insert(person[1], person)
     return result
 
+def isPrefixOfWord(sentence, searchWord):
+    """
+    :type sentence: str
+    :type searchWord: str
+    :rtype: int
+    """
+    arr = sentence.split(" ")
+    prefixLength = len(searchWord)
+    for i in range(len(arr)):
+        print(arr[i][: (prefixLength)])
+        if len(arr[i]) > prefixLength and arr[i][: prefixLength] == searchWord:
+            return (i+1)
+    return -1
+
+
 A = TreeNode(5, TreeNode(4, TreeNode(3, None,None), TreeNode(2,None,None)), TreeNode(1, None,None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
 C = TreeNode(5, TreeNode(4,None, TreeNode(3, None,None)), None)
@@ -194,5 +209,7 @@ print("result")
 # print(maxSubArray([-2, -1]))
 # print(commonChars(["bella","label","roller"]))
 #print(findUnsortedSubarray([2, 6, 4, 8, 10, 9, 15]))
-print(reconstruct([[6, 0], [5, 0], [4, 0], [3, 2], [2, 2], [1, 4]]))
-reconstruct([[9,0],[7,0],[1,9],[3,0],[2,7],[5,3],[6,0],[3,4],[6,2],[5,2]])
+# print(reconstruct([[6, 0], [5, 0], [4, 0], [3, 2], [2, 2], [1, 4]]))
+# reconstruct([[9,0],[7,0],[1,9],[3,0],[2,7],[5,3],[6,0],[3,4],[6,2],[5,2]])
+print(isPrefixOfWord("i love eating burger",
+               "burg"))

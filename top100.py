@@ -1,4 +1,4 @@
-
+from itertools import permutations
 class TreeNode(object):
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -550,6 +550,31 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
+        perm = permutations(nums)
+        result = []
+        # Print the obtained permutations
+        for i in list(perm):
+            result.append(list(i))
+        return result
+    
+
+
+    #94. Binary Tree Inorder Traversal   Very Important knowledge
+    def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        result = []
+        def traverse (node, result):
+            if node is None:
+                return
+            else:
+                traverse(node.left, result)
+                result.append(node.val)
+                traverse(node.right, result)
+        traverse(root, result)
+        return result
 
 
             
