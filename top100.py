@@ -521,6 +521,38 @@ class Solution(object):
 
     
         
+    #406. Queue Reconstruction by Height
+    def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
+        #Before: [[9,0],[7,0],[1,9],[3,0],[2,7],[5,3],[6,0],[3,4],[6,2],[5,2]]
+        sortedPpl = sorted(people)
+        #After first sort: [[1, 9], [2, 7], [3, 0], [3, 4], [5, 2], [5, 3], [6, 0], [6, 2], [7, 0], [9, 0]]
+        middlePpl = []
+        for i in range (0, len(sortedPpl)):
+            if (not middlePpl):
+                middlePpl.append(sortedPpl[i])
+            else:
+                if (sortedPpl[i][0] > middlePpl[0][0]):
+                    middlePpl.insert(0, sortedPpl[i])
+                else:
+                    middlePpl.insert(middlePpl.index(sortedPpl[i-1])+1, sortedPpl[i])
+        # After second sort: [[9, 0], [7, 0], [6, 0], [6, 2], [5, 2], [5, 3], [3, 0], [3, 4], [2, 7], [1, 9]]
+        result = []
+        for person in middlePpl:
+            if (not result):
+                result.append(person)
+            else:
+                result.insert(person[1], person)
+        return result
+
+    #46. Permutations
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+
+
+            
 
     
 

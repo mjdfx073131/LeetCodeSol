@@ -166,10 +166,33 @@ def findUnsortedSubarray(nums) -> int:
         return 0
     return largest - slowest + 1
 
+
+def reconstruct(people):
+    sortedPpl = sorted(people)
+    middlePpl = []
+    for i in range (0, len(sortedPpl)):
+        if (not middlePpl):
+            middlePpl.append(sortedPpl[i])
+        else:
+            if (sortedPpl[i][0] > middlePpl[0][0]):
+                middlePpl.insert(0, sortedPpl[i])
+            else:
+                middlePpl.insert(middlePpl.index(sortedPpl[i-1])+1, sortedPpl[i])
+            
+    result = []
+    for person in middlePpl:
+        if (not result):
+            result.append(person)
+        else:
+            result.insert(person[1], person)
+    return result
+
 A = TreeNode(5, TreeNode(4, TreeNode(3, None,None), TreeNode(2,None,None)), TreeNode(1, None,None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
 C = TreeNode(5, TreeNode(4,None, TreeNode(3, None,None)), None)
 print("result")
 # print(maxSubArray([-2, -1]))
 # print(commonChars(["bella","label","roller"]))
-print(findUnsortedSubarray([2, 6, 4, 8, 10, 9, 15]))
+#print(findUnsortedSubarray([2, 6, 4, 8, 10, 9, 15]))
+print(reconstruct([[6, 0], [5, 0], [4, 0], [3, 2], [2, 2], [1, 4]]))
+reconstruct([[9,0],[7,0],[1,9],[3,0],[2,7],[5,3],[6,0],[3,4],[6,2],[5,2]])
