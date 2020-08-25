@@ -575,6 +575,34 @@ class Solution(object):
                 traverse(node.right, result)
         traverse(root, result)
         return result
+    
+
+    #Daily Temperatures 
+    def dailyTemperatures(self, T):
+        """
+        :type T: List[int]
+        :rtype: List[int]
+        """
+        result = []
+        dic = {}
+        currT = T[0]   # for reference
+        for i in range (len(T)):
+            if T[i] > currT:
+                dic[T[i]] = i
+        for i in range (len(T)):
+            for t in dic:
+                if(t > T[i] and i < dic[t]):
+                    result.append(dic[t] - i)
+                    break
+                else:
+                    result.append(0) 
+        return result
+        
+
+            
+            
+
+
 
 
             
