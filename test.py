@@ -200,7 +200,25 @@ def isPrefixOfWord(sentence, searchWord):
         if len(arr[i]) > prefixLength and arr[i][: prefixLength] == searchWord:
             return (i+1)
     return -1
+#Daily Temperatures
 
+def dailyTemperatures(T):
+    """
+    :type T: List[int]
+    :rtype: List[int]
+    """
+    if (len(T) == 0 or len(T) == 1):
+        return [0]
+    wait = [0]*len(T)
+    stack = []
+
+    for i, x in enumerate(T):
+        while stack and x > T[stack[-1]]:
+            j = stack.pop()
+            wait[j] = i - j
+        stack.append(i)
+
+    return wait
 
 A = TreeNode(5, TreeNode(4, TreeNode(3, None,None), TreeNode(2,None,None)), TreeNode(1, None,None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
@@ -211,5 +229,4 @@ print("result")
 #print(findUnsortedSubarray([2, 6, 4, 8, 10, 9, 15]))
 # print(reconstruct([[6, 0], [5, 0], [4, 0], [3, 2], [2, 2], [1, 4]]))
 # reconstruct([[9,0],[7,0],[1,9],[3,0],[2,7],[5,3],[6,0],[3,4],[6,2],[5,2]])
-print(isPrefixOfWord("i love eating burger",
-               "burg"))
+print(dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73]))

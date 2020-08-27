@@ -583,20 +583,19 @@ class Solution(object):
         :type T: List[int]
         :rtype: List[int]
         """
-        result = []
-        dic = {}
-        currT = T[0]   # for reference
-        for i in range (len(T)):
-            if T[i] > currT:
-                dic[T[i]] = i
-        for i in range (len(T)):
-            for t in dic:
-                if(t > T[i] and i < dic[t]):
-                    result.append(dic[t] - i)
-                    break
-                else:
-                    result.append(0) 
+        if (len(T) == 0 or len(T) == 1):
+            return [0]
+        result = [0]*len(T)
+        stack = []
+
+        for i, x in enumerate(T):
+            while stack and x > T[stack[-1]]:
+                j = stack.pop()
+                result[j] = i - j
+            stack.append(i)
+
         return result
+        
         
 
             
