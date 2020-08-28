@@ -220,6 +220,33 @@ def dailyTemperatures(T):
 
     return wait
 
+def generateParenthesis(nums):
+    """
+    :type n: int
+    :rtype: List[str]
+    """
+    result = []
+    currSubset = []
+
+    def createSubsets(result, idx, currSubset):
+        if (idx == len(nums) - 1):
+            newSubset = currSubset.copy()
+            newSubset.append(nums[idx])
+            result.append(newSubset)
+            return
+        else:
+            newSubset = currSubset.copy()
+            newSubset.append(nums[idx])
+            result.append(newSubset)
+            createSubsets(result, idx+1, newSubset)
+            if (idx+2 <= len(nums)-1):
+                for j in range(idx+2, len(nums)):
+                    createSubsets(result, j, newSubset)
+    result.append(currSubset)
+    for i in range(0, len(nums)):
+        createSubsets(result, i, [])
+    return result
+
 A = TreeNode(5, TreeNode(4, TreeNode(3, None,None), TreeNode(2,None,None)), TreeNode(1, None,None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
 C = TreeNode(5, TreeNode(4,None, TreeNode(3, None,None)), None)
@@ -229,4 +256,5 @@ print("result")
 #print(findUnsortedSubarray([2, 6, 4, 8, 10, 9, 15]))
 # print(reconstruct([[6, 0], [5, 0], [4, 0], [3, 2], [2, 2], [1, 4]]))
 # reconstruct([[9,0],[7,0],[1,9],[3,0],[2,7],[5,3],[6,0],[3,4],[6,2],[5,2]])
-print(dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73]))
+# print(dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73]))
+print(generateParenthesis([1,2,3,4]))

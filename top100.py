@@ -577,7 +577,7 @@ class Solution(object):
         return result
     
 
-    #Daily Temperatures 
+    #739. Daily Temperatures 
     def dailyTemperatures(self, T):
         """
         :type T: List[int]
@@ -596,9 +596,62 @@ class Solution(object):
 
         return result
         
-        
+    #22. Generate Parentheses
+    def generateParenthesis(self, n):
+        """
+        :type n: int
+        :rtype: List[str]
+        """
+        result = []
+        currOpenBra = 0
+        currCloseBra = 0
 
-            
+        def createParenthesis(n, currStr, currOpenBra, currCloseBra, result):
+            if len(currStr) == 2*n:
+                result.append(currStr)
+                return
+            else:
+                if currOpenBra < n:
+                    createParenthesis(
+                        n, currStr + "(", currOpenBra + 1, currCloseBra, result)
+                if currOpenBra > currCloseBra:
+                    createParenthesis(n, currStr + ")",
+                                      currOpenBra, currCloseBra + 1, result)
+        createParenthesis(n, "", currOpenBra, currCloseBra, result)
+        return result
+        
+    
+    #78. Subsets
+    def subsets(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        result = []
+        currSubset = []
+
+        def createSubsets(result, idx, currSubset):
+            if (idx == len(nums) - 1):
+                newSubset = currSubset.copy()
+                newSubset.append(nums[idx])
+                result.append(newSubset)
+                return
+            else:
+                newSubset = currSubset.copy()
+                newSubset.append(nums[idx])
+                result.append(newSubset)
+                createSubsets(result, idx+1, newSubset)
+                if (idx+2 <= len(nums)-1):
+                    for j in range(idx+2, len(nums)):
+                        createSubsets(result, j, newSubset)
+        result.append(currSubset)
+        for i in range(0, len(nums)):
+            createSubsets(result, i, [])
+        return result
+
+
+             
+
             
 
 
