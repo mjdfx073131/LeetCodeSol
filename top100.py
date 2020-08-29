@@ -648,6 +648,25 @@ class Solution(object):
         for i in range(0, len(nums)):
             createSubsets(result, i, [])
         return result
+    #347. Top K Freduent Elements
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        result = []
+        dic = {}
+        for num in nums:
+            if num not in dic:
+                dic[num] = 1
+            else:
+                dic[num] += 1
+        topK = sorted(dic.values())
+        for num in dic:
+            if dic[num] in topK[len(topK)-k:]:
+                result.append(num)
+        return result
+
+    #647. Palindromic Substrings
+    def countSubstrings(self, s: str) -> int:
+        
+
 
 
              
