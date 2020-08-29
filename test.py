@@ -246,6 +246,25 @@ def generateParenthesis(nums):
     for i in range(0, len(nums)):
         createSubsets(result, i, [])
     return result
+def countSubstrings(s):
+    result = 0
+    def checkPalindromic(s):
+        return s == s[::-1]
+
+    def checkSubstr(s, currStr, idx):
+        nonlocal result
+        if (idx == len(s) -1):
+            if(checkPalindromic(currStr + s[idx])):
+                result +=1
+                return
+        else:
+            newStr = currStr + s[idx]
+            if(checkPalindromic(newStr)):
+                result +=1
+            checkSubstr(s, newStr, idx+1)
+    for i in range (len(s)):
+        checkSubstr(s, "", i)
+    return result
 
 A = TreeNode(5, TreeNode(4, TreeNode(3, None,None), TreeNode(2,None,None)), TreeNode(1, None,None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
@@ -257,4 +276,4 @@ print("result")
 # print(reconstruct([[6, 0], [5, 0], [4, 0], [3, 2], [2, 2], [1, 4]]))
 # reconstruct([[9,0],[7,0],[1,9],[3,0],[2,7],[5,3],[6,0],[3,4],[6,2],[5,2]])
 # print(dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73]))
-print(generateParenthesis([1,2,3,4]))
+print(countSubstrings("abc"))

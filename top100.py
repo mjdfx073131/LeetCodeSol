@@ -665,7 +665,22 @@ class Solution(object):
 
     #647. Palindromic Substrings
     def countSubstrings(self, s: str) -> int:
-        
+        result = 0
+        def checkPalindromic(s):
+            return s == s[::-1]
+
+        def checkSubstr(s, currStr, idx, result):
+            if (idx == len(s) -1):
+                if(checkPalindromic(currStr + s[idx])):
+                    result +=1
+                    return
+            else:
+                if(checkPalindromic(currStr + s[idx])):
+                    result +=1
+                checkSubstr(s, currStr, idx+1, result)
+        checkSubstr(s, "", 0, result)
+        return result
+
 
 
 
