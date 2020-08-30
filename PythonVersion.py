@@ -1142,7 +1142,21 @@ class Solution:
                 if i < 0:
                     result +=1
         return result
-    
+
+    #1528
+    def restoreString(self, s, indices):
+        """
+        :type s: str
+        :type indices: List[int]
+        :rtype: str
+        """
+        result = ""
+        sortedArr = [None for i in range(len(s))]
+        for i in range(len(indices)):
+            sortedArr[indices[i]] = s[i]
+        for str in sortedArr:
+            result += str
+        return result
     #884
     def uncommonFromSentences(self, A, B):
         """
@@ -1150,5 +1164,77 @@ class Solution:
         :type B: str
         :rtype: List[str]
         """
+        dic = {}
+        for word in A.split(" "):
+            if word not in dic:
+                dic[word] = 1
+            else:
+                dic[word] += 1
+        for word in B.split(" "):
+            if word not in dic:
+                dic[word] = 1
+            else:
+                dic[word] += 1
+        result =[]
+        for word in dic:
+            if dic[word] == 1:
+                result.append(word)
+        return result
+    
 
+    #1436
+
+    def destCity(self, paths):
+        """
+        :type paths: List[List[str]]
+        :rtype: str
+        """
+        start = []
+        end = []
+        for path in paths:
+            start.append(path[0])
+            end.append(path[1])
+        path = paths[0]
+        while True:
+            if path[1] in start:
+                for search in paths:
+                    if (search[0] == path[1]):
+                        path = search
+            else:
+                return path[1]
+    
+    #1455
+    def isPrefixOfWord(self, sentence, searchWord):
+        """
+        :type sentence: str
+        :type searchWord: str
+        :rtype: int
+        """
+        arr = sentence.split(" ")
+        prefixLength = len(searchWord)
+        for i in range(len(arr)):
+            if len(arr[i]) >= prefixLength and arr[i][: prefixLength] == searchWord:
+                return (i+1)
+        return -1
+    
+    #1550
+    def threeConsecutiveOdds(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: bool
+        """
+        i = 0
+        while i < len(arr):
+            if arr[i] % 2 != 0 and i+2 < len(arr):
+                if arr[i+1] % 2 != 0:
+                    if arr[i+2] % 2 != 0:
+                        return True
+                    else:
+                        i += 1
+                else:
+                    i += 1
+            else:
+                i += 1
+        return False
+                
 

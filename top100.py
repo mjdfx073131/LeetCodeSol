@@ -682,16 +682,46 @@ class Solution(object):
         return result
 
 
-
-
-             
+    #238. Product of Array Except Self 
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        pre = []
+        post= []
+        for i in range (len(nums)):
+            if i ==0 :
+                pre.append(1)
+            else:
+                pre.append(pre[-1]*nums[i-1])
+        for j in range (len(nums)-1, -1, -1):
+            if j == len(nums)-1:
+                post.append(1)
+            else:
+                post.append(post[-1] * nums[j+1])
+        result = []
+        for i in range (len(nums)):
+            result.append(pre[i]*post[len(nums)-i-1])
+        return result             
 
             
+    #49. Group Anagrams
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        dic = {}
+        for str in strs:
+            sortedArr = sorted(str)
+            string = ""
+            for char in sortedArr:
+                string += char
+            if string not in dic:
+                dic[string] = [str]
+            else:
+                dic[string].append(str)
+        return dic.values()
 
-
-
-
-            
+    #48.Rotate Image
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        
 
     
 
