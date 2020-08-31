@@ -266,6 +266,31 @@ def countSubstrings(s):
         checkSubstr(s, "", i)
     return result
 
+def combinationSum(candidates, target):
+    result = []
+
+    def createSum(target, currSum, idx, result, currArr):
+        if(currSum == target):
+            newSubset = currArr.copy()
+            newSubset.append(candidates[idx])
+            result.append(newSubset)
+            return
+        elif(currSum > target or idx >= len(candidates)-1):
+            return
+        else:
+            if (currSum + candidates[idx] <= target):
+                newSubset = currArr.copy()
+                newSubset.append(candidates[idx])
+                # if currSum + candidates[idx] == target:
+                #     result.append(newSubset)
+                #     return
+                createSum(target, currSum + candidates[idx], idx, result, newSubset)
+            createSum(target, currSum +
+                      candidates[idx+1], idx+1, result, currArr)
+    for i in range(len(candidates)):
+        createSum(target, 0, i, result, [])
+    return result
+
 A = TreeNode(5, TreeNode(4, TreeNode(3, None,None), TreeNode(2,None,None)), TreeNode(1, None,None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
 C = TreeNode(5, TreeNode(4,None, TreeNode(3, None,None)), None)
@@ -276,4 +301,5 @@ print("result")
 # print(reconstruct([[6, 0], [5, 0], [4, 0], [3, 2], [2, 2], [1, 4]]))
 # reconstruct([[9,0],[7,0],[1,9],[3,0],[2,7],[5,3],[6,0],[3,4],[6,2],[5,2]])
 # print(dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73]))
-print(countSubstrings("abc"))
+#print(countSubstrings("abc"))
+print(combinationSum([2,3,5], 8))

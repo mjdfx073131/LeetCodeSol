@@ -721,9 +721,53 @@ class Solution(object):
         """
         Do not return anything, modify matrix in-place instead.
         """
-        
+        for i in range (len(matrix)// 2):
+            for j in range (i, len(matrix[i])-1-i):
+                temp = matrix[i][j]
+                matrix[i][j] = matrix[len(matrix)-1-j][i]
+                matrix[len(matrix)-1-j][i] = matrix[len(matrix)-1-i][len(matrix)-1 -j]
+                matrix[len(matrix)-1-i][len(matrix)-1-j] = matrix[j][len(matrix)-1-i]
+                matrix[j][len(matrix)-1-i] = temp
 
-    
+    #39. Combination Sum
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        if target == 0:
+            return [[]]
+        ans = []
+        for i, n in enumerate(candidates):
+            if target >= n:
+                ans += [[n] +
+                        l for l in self.combinationSum(candidates[i:], target - n)]
+        return ans
 
 
+    #287. Find the Duplicate Number
 
+    def findDuplicate(self, nums: List[int]) -> int:
+        st = set()
+        for num in nums:
+            if num not in st:
+                st.add(num)
+            else:
+                return num
+
+    #215. Kth Largest Element in an Array]
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        return sorted(nums)[len(nums)-k]
+
+    #102. Binary Tree Order Traversal
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        if root == None:
+            return []
+        dic = {0: []}
+        def bfs(node, level):
+            if(node == None):
+                return
+            dic[level].append(node.val)
+            if node.left != None or node.right != None:
+                if (level+1) not in dic:
+                    dic[level+1] = []
+                bfs(node.left, level+1)
+                bfs(node.right, level+1)
+        bfs(root, 0)
+        return dic.values()
