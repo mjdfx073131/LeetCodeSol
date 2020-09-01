@@ -291,6 +291,23 @@ def combinationSum(candidates, target):
         createSum(target, 0, i, result, [])
     return result
 
+def minPathSum(grid) -> int:
+    m = len(grid)
+    n = len(grid[0])
+    result = [[0 for i in range(n)] for j in range(m)]
+    for i in range(m):
+        for j in range(n):
+            if i == 0:
+                result[i][j] = result[i][j-1] + grid[i][j]
+                continue
+            if j == 0:
+                result[i][j] = result[i-1][j] + grid[i][j]
+                continue
+            else:
+                result[i][j] = grid[i][j] + min(result[i-1][j], result[i][j-1])
+    print(result)
+    return result[m-1][n-1]
+
 A = TreeNode(5, TreeNode(4, TreeNode(3, None,None), TreeNode(2,None,None)), TreeNode(1, None,None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
 C = TreeNode(5, TreeNode(4,None, TreeNode(3, None,None)), None)
@@ -302,4 +319,4 @@ print("result")
 # reconstruct([[9,0],[7,0],[1,9],[3,0],[2,7],[5,3],[6,0],[3,4],[6,2],[5,2]])
 # print(dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73]))
 #print(countSubstrings("abc"))
-print(combinationSum([2,3,5], 8))
+print(minPathSum([[1,3,1],[1,5,1],[4,2,1]]))

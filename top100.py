@@ -771,3 +771,76 @@ class Solution(object):
                 bfs(node.right, level+1)
         bfs(root, 0)
         return dic.values()
+
+    #64. Minimum Path Sum
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        m = len(grid)
+        n = len(grid[0])
+        result = [[0 for i in range(n)] for j in range(m)]
+        for i in range(m):
+            for j in range(n):
+                if i == 0:
+                    result[i][j] = result[i][j-1] + grid[i][j]
+                    continue
+                if j == 0:
+                    result[i][j] = result[i-1][j] + grid[i][j]
+                    continue
+                else:
+                    result[i][j] = grid[i][j] + min(result[i-1][j], result[i][j-1])
+        print(result)
+        return result[m-1][n-1]
+    
+    def minPathSum1(self, grid: List[List[int]]) -> int:
+        result = []
+        m = len(grid)
+        n = len(grid[0])
+
+        def pathSum(grid, currSum, currX, currY):
+            if (currX == len(grid)-1 and currY == len(grid[currX])-1):
+                result.append(currSum)
+            else:
+                currSum += grid[currX][currY]
+                if (currX == len(grid)-1):
+                    pathSum(grid, currSum, currX, currY+1)
+                elif (currY == n-1):
+                    pathSum(grid, currSum, currX+1, currY)
+                else:
+                    pathSum(grid, currSum, currX, currY+1)
+                    pathSum(grid, currSum, currX+1, currY)
+        pathSum(grid, 0, 0, 0)
+        return min(result)
+
+    def minPathSum2(self, grid: List[List[int]]) -> int:
+        m = len(grid)
+        n = len(grid[0])
+        result = [[0 for i in range(n)] for j in range(m)]
+        result[0][0] = grid[0][0]
+        for i in range(1, n):
+            result[0][i] = grid[0][i] + result[0][i-1]
+        for j in range(1, m):
+            result[j][0] = grid[j][0] + result[j-1][0]
+        for i in range(1, m):
+            for j in range(1, n):
+                result[i][j] = grid[i][j] + min(result[i-1][j], result[i][j-1])
+        return result[m-1][n-1]
+
+    #62. Unique Paths
+    def uniquePaths(self, m: int, n: int) -> int:
+        if (m == 1 or n == 1):
+            return 1
+        result = [[0 for i in range(m)] for j in range(n)]
+        for i in range(1, m):
+            result[0][i] = 1
+        for j in range(1, n):
+            result[j][0] = 1
+        for i in range(1, n):
+            for j in range(1, m):
+                result[i][j] = result[i-1][j] + result[i][j-1]
+        return result[n-1][m-1]
+
+    def uniquePaths2(self, m: int, n: int) -> int:
+        result = [[1]*m] * n
+        for i in range(1, n):
+            for j in range(1, m):
+                result[i][j] = result[i-1][j] + result[i][j-1]
+        return result[n-1][m-1]
