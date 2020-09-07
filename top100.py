@@ -370,7 +370,7 @@ class Solution(object):
     #198
     def rob(self, nums):
         """
-        :type nums: List[int]
+        :type nums: List[int] 
         :rtype: int
         """
         result = []
@@ -844,3 +844,52 @@ class Solution(object):
             for j in range(1, m):
                 result[i][j] = result[i-1][j] + result[i][j-1]
         return result[n-1][m-1]
+
+
+    #96. Unique Binary Search Tree
+    def numTrees(self, n: int) -> int:
+        '''
+        if 0 then 0
+        if 1 then 1
+        if 2 then we treat 2 as 1,2:
+                then 1 there is only 2 on the right then 1
+                then 2 there is only 1 on the left then 1
+                then sum them up got 2
+        if 3 then 1,2,3
+            then 1 there are 2,3 on the right, then 2
+            then 2 1 on the left 3 on the right then 1
+            then 3 there are 1,2 on the left, then 2
+            total 5
+        '''
+        result = [1] * (n+1)
+        if n == 0:
+            return 0
+        if n == 1:
+            return 1
+        for i in range(2, n+1):
+            sum = 0
+            for j in range(0, i):
+                left = j
+                right = i-1-j
+                sum += (result[left] * result[right])
+            result[i] = sum
+        return result[n]
+
+    #11. Contain the most water
+    def maxArea(self, height: List[int]) -> int:
+        left = 0
+        right = len(height) -1
+        maxA = 0
+        while (left < right):
+            area = (right - left) * min (height[right], height[left])
+            if area > maxA:
+                maxA =area
+            if height[right]> height[left]:
+                left +=1
+            else:
+                right -=1
+        return maxA
+
+    #337. House Robber III
+    def rob(self, root: TreeNode) -> int:
+        

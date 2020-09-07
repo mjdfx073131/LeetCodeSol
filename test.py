@@ -308,6 +308,20 @@ def minPathSum(grid) -> int:
     print(result)
     return result[m-1][n-1]
 
+def numTrees(n):
+    result = [1] * (n+2)
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    for i in range(2, n+1):
+        sum = 0
+        for j in range(0, i):
+            left = j
+            right = i-1-j
+            sum += (result[left] * result[right])
+        result[i] = sum
+    return result[n]
 A = TreeNode(5, TreeNode(4, TreeNode(3, None,None), TreeNode(2,None,None)), TreeNode(1, None,None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
 C = TreeNode(5, TreeNode(4,None, TreeNode(3, None,None)), None)
@@ -319,4 +333,5 @@ print("result")
 # reconstruct([[9,0],[7,0],[1,9],[3,0],[2,7],[5,3],[6,0],[3,4],[6,2],[5,2]])
 # print(dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73]))
 #print(countSubstrings("abc"))
-print(minPathSum([[1,3,1],[1,5,1],[4,2,1]]))
+# print(minPathSum([[1,3,1],[1,5,1],[4,2,1]]))
+print(numTrees(3))
