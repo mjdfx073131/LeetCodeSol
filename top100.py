@@ -897,14 +897,13 @@ class Solution(object):
                 dic[S[i]] = [i]
             else:
                 dic[S[i]].append(i)
-        print(dic)
         result = []
         currLen = 0
         start = 0
         end = 0
         for char in dic:
             if currLen == 0:
-                currLen = dic[char][-1] - dic[char][0]
+                currLen = dic[char][-1] - dic[char][0]+1
                 start = dic[char][0]
                 end = dic[char][-1]
             else:
@@ -914,9 +913,12 @@ class Solution(object):
                 else:
                     rst = end - start + 1
                     result.append(rst)
-                    currLen = dic[char][-1] - dic[char][0]
+                    currLen = dic[char][-1] - dic[char][0]+1
                     start = dic[char][0]
                     end = dic[char][-1]
+            if (list(dic)[-1] == char):
+                rst = end - start + 1
+                result.append(rst)
         return result
 
     #337. House Robber III

@@ -322,6 +322,38 @@ def numTrees(n):
             sum += (result[left] * result[right])
         result[i] = sum
     return result[n]
+
+def partitionLabels(S):
+    dic = {}
+    for i in range(len(S)):
+        if S[i] not in dic:
+            dic[S[i]] = [i]
+        else:
+            dic[S[i]].append(i)
+    print(dic)
+    result = []
+    currLen = 0
+    start = 0
+    end = 0
+    for char in dic:
+        if currLen == 0:
+            currLen = dic[char][-1] - dic[char][0]+1
+            start = dic[char][0]
+            end = dic[char][-1]
+        else:
+            if dic[char][0] < end:
+                if dic[char][-1] > end:
+                    end = dic[char][-1]
+            else:
+                rst = end - start + 1
+                result.append(rst)
+                currLen = dic[char][-1] - dic[char][0]+1
+                start = dic[char][0]
+                end = dic[char][-1]
+        if (list(dic)[-1] == char):
+            rst = end - start + 1
+            result.append(rst)
+    return result
 A = TreeNode(5, TreeNode(4, TreeNode(3, None,None), TreeNode(2,None,None)), TreeNode(1, None,None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
 C = TreeNode(5, TreeNode(4,None, TreeNode(3, None,None)), None)
@@ -334,4 +366,4 @@ print("result")
 # print(dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73]))
 #print(countSubstrings("abc"))
 # print(minPathSum([[1,3,1],[1,5,1],[4,2,1]]))
-print(numTrees(3))
+print(partitionLabels("vhaagbqkaq"))
