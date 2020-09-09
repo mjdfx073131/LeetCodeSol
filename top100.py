@@ -889,6 +889,35 @@ class Solution(object):
             else:
                 right -=1
         return maxA
+    #73. Partition Labels
+    def partitionLabels(self, S: str) -> List[int]:
+        dic = {}
+        for i in range(len(S)):
+            if S[i] not in dic:
+                dic[S[i]] = [i]
+            else:
+                dic[S[i]].append(i)
+        print(dic)
+        result = []
+        currLen = 0
+        start = 0
+        end = 0
+        for char in dic:
+            if currLen == 0:
+                currLen = dic[char][-1] - dic[char][0]
+                start = dic[char][0]
+                end = dic[char][-1]
+            else:
+                if dic[char][0] < end:
+                    if dic[char][-1] > end:
+                        end = dic[char][-1]
+                else:
+                    rst = end - start + 1
+                    result.append(rst)
+                    currLen = dic[char][-1] - dic[char][0]
+                    start = dic[char][0]
+                    end = dic[char][-1]
+        return result
 
     #337. House Robber III
     def rob(self, root: TreeNode) -> int:
