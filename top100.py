@@ -923,4 +923,5 @@ class Solution(object):
 
     #337. House Robber III
     def rob(self, root: TreeNode) -> int:
+        result = []
         

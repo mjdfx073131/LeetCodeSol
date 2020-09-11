@@ -1236,5 +1236,62 @@ class Solution:
             else:
                 i += 1
         return False
-                
 
+    #1572
+    def diagonalSum(self, mat: List[List[int]]) -> int:
+        sum = 0
+        for i, row in enumerate(mat):
+            if i == len(row)-i-1:
+                sum += (row[i])
+            else:
+                sum += (row[i] + row[len(row)-i-1])
+        return sum
+
+    #1413           
+    def minStartValue(self, nums: List[int]) -> int:
+        stepSum = 1
+        maxSum = 0
+        for num in nums:
+            stepSum += (1 + (-num))
+            if stepSum > maxSum:
+                maxSum = stepSum
+        if maxSum == 0:
+            return 1
+        else:
+            return maxSum
+
+    #1486. XOR Operation in an Array
+    def xorOperation(self, n: int, start: int) -> int:
+        step = 1
+        result = start
+        while (step < n):
+            result = result ^ (start+2*step)
+            step += 1
+        return result
+
+    #561. Array Partition I
+    def arrayPairSum(self, nums: List[int]) -> int:
+        result = 0
+        sortedArr = sorted(nums)
+        for i in range(0, len(sortedArr), 2):
+            result += sortedArr[i]
+        return result
+
+    #1460. Make Two Arrays Equal by Reversing Sub-arrays
+    def canBeEqual(self, target: List[int], arr: List[int]) -> bool:
+        return sorted(target) == sorted(arr)
+
+    #1475. Final Prices With a Special Discount in a Shop
+    def finalPrices(self, prices: List[int]) -> List[int]:
+        result = []
+        for i in range(len(prices) - 1):
+            price = prices[i]
+            for j in range(i+1, len(prices)):
+                if prices[j] <= prices[i]:
+                    result.append(price - prices[j])
+                    break
+                if j == len(prices) - 1:
+                    result.append(price)
+            if (i == len(prices) - 2):
+                result.append(prices[-1])
+        return result
