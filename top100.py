@@ -407,7 +407,6 @@ class Solution(object):
             
 
     #141 Linked List Cycle
-
     def hasCycle(self, head):
         """
         :type head: ListNode

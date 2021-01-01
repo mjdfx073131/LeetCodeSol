@@ -354,7 +354,22 @@ def partitionLabels(S):
             rst = end - start + 1
             result.append(rst)
     return result
-A = TreeNode(5, TreeNode(4, TreeNode(3, None,None), TreeNode(2,None,None)), TreeNode(1, None,None))
+
+
+def diagonalSum(mat):
+    if len(mat) == 1:
+        return mat[0][0]
+    sum = 0
+
+    for i, row in enumerate(mat):
+        if i == len(row)-i-1:
+            sum += (row[i])
+        else:
+            sum += (row[i] + row[len(row)-i-1])
+    return sum
+
+A = TreeNode(5, TreeNode(4, TreeNode(3, None, None),
+                         TreeNode(2, None, None)), TreeNode(1, None, None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
 C = TreeNode(5, TreeNode(4,None, TreeNode(3, None,None)), None)
 print("result")
@@ -366,4 +381,22 @@ print("result")
 # print(dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73]))
 #print(countSubstrings("abc"))
 # print(minPathSum([[1,3,1],[1,5,1],[4,2,1]]))
-print(partitionLabels("vhaagbqkaq"))
+#print(partitionLabels("vhaagbqkaq"))
+print(diagonalSum([[1,2,3],[4,5,6],[7,8,9]]))
+
+
+# 
+
+def solution (G):
+    result =[0,0,0]
+    for i in range(len(G)):
+        if G[i] == "R":
+            result[0] +=2
+            result[2] +=1
+        elif G[i] == "S":
+            result[2] +=2
+            result[1] +=1
+        else:
+            result[0] +=1
+            result[1] +=2
+    return max(result)
