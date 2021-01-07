@@ -922,5 +922,15 @@ class Solution(object):
 
     #337. House Robber III
     def rob(self, root: TreeNode) -> int:
+        if (root is None):
+            return 0
+
+        # result = []
+        # result.append(nums[0])
+        # result.append(max(result[0], nums[1]))
+        # for i in range(2, len(nums)):
+        #     result.append(max(result[i-2] + nums[i], result[i-1]))
+        # return result[-1]
         result = []
+        result.append(root.val)
         

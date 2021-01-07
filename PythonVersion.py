@@ -1171,7 +1171,7 @@ class Solution:
             else:
                 dic[word] += 1
         for word in B.split(" "):
-            if word not in dic:
+            if word not in dic:  
                 dic[word] = 1
             else:
                 dic[word] += 1

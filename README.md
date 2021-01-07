@@ -12,8 +12,11 @@
 - Jisoo
 
 ```python
-class Kerry:
+class Me:
     def __init__(self):
+        self.name = "Hongkaiyue(Kerry) Zhou"
+        self.introduction = "I am a programming pianist."
+        self.hobbies = ["soccer", "music"]
         self.motto = "More than Kerry"
 ```
 
