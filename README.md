@@ -1,12 +1,4 @@
 # Leetcode solution
-```
-.____                  __   _________            .___         _________      .__          __  .__               
-|    |    ____   _____/  |_ \_   ___ \  ____   __| _/____    /   _____/ ____ |  |  __ ___/  |_|__| ____   ____  
-|    |  _/ __ \_/ __ \   __\/    \  \/ /  _ \ / __ |/ __ \   \_____  \ /  _ \|  | |  |  \   __\  |/  _ \ /    \ 
-|    |__\  ___/\  ___/|  |  \     \___(  <_> ) /_/ \  ___/   /        (  <_> )  |_|  |  /|  | |  (  <_> )   |  \
-|_______ \___  >\___  >__|   \______  /\____/\____ |\___  > /_______  /\____/|____/____/ |__| |__|\____/|___|  /
-        \/   \/     \/              \/            \/    \/          \/                                       \/ 
-```
 
 ## The solutions are written in `Java` and `Python`
 
@@ -20,10 +12,9 @@
 - Jisoo
 
 ```python
-class Me:
+class Kerry:
     def __init__(self):
         self.name = "Hongkaiyue(Kerry) Zhou"
-        self.introduction = "I am a programming pianist."
         self.hobbies = ["soccer", "music"]
         self.motto = "More than Kerry"
 ```
