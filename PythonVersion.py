@@ -1295,3 +1295,6 @@ class Solution:
             if (i == len(prices) - 2):
                 result.append(prices[-1])
         return result
+
+
+

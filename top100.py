@@ -925,12 +925,42 @@ class Solution(object):
         if (root is None):
             return 0
 
-        # result = []
-        # result.append(nums[0])
-        # result.append(max(result[0], nums[1]))
-        # for i in range(2, len(nums)):
-        #     result.append(max(result[i-2] + nums[i], result[i-1]))
-        # return result[-1]
-        result = []
-        result.append(root.val)
-        
+        '''
+        We have two options:
+        rob the current house
+        or dont rob the current house
+        '''
+        def rob_helper(root, isParentRobbed):
+            if root == None:
+                return 0
+            if (isParentRobbed):
+                return rob_helper(root.left, False) + rob_helper(root.right, False)
+
+            return max(rob_helper(root.left, False) + rob_helper(root.right, False), root.val+rob_helper(root.left, True) + rob_helper(root.right, True))
+
+        return rob_helper(root, False)
+
+        #337. House Robber III
+
+    def rob(self, root: TreeNode) -> int:
+        def superrob(node):
+            # returns tuple of size two (now, later)
+            # now: max money earned if input node is robbed
+            # later: max money earned if input node is not robbed
+
+            # base case
+            if not node:
+                return (0, 0)
+
+            # get values
+            left, right = superrob(node.left), superrob(node.right)
+
+            # rob now
+            now = node.val + left[1] + right[1]
+
+            # rob later
+            later = max(left) + max(right)
+
+            return (now, later)
+
+        return max(superrob(root))

@@ -11,6 +11,8 @@
 - Rosé
 - Jisoo
 
+
+
 ```python
 class Kerry:
     def __init__(self):
