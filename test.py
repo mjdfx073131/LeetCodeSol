@@ -368,6 +368,36 @@ def diagonalSum(mat):
             sum += (row[i] + row[len(row)-i-1])
     return sum
 
+def decodeString(s):
+    stack = []
+    result = ""
+    count = 0
+    for char in s:
+        if char.isdigit():
+            stack.append(char)
+            count +=1
+        elif char == "[":
+            stack.append(char)
+        elif char.isalpha():
+            stack.append(char)
+        elif char == "]":
+            if count >= 1:
+                while stack[-1] != "[":
+                    n = stack.pop()
+                    result = n + result
+                stack.pop()  # remove "["
+                result = result * int(stack.pop())
+            else:
+                temp = ""
+                while stack[-1] != "[":
+                    n = stack.pop()
+                    temp = n + temp
+                stack.pop()  # remove "["
+                result += temp * int(stack.pop())
+            count -=1
+    for alpha in stack:
+        result += alpha
+    return result
 A = TreeNode(5, TreeNode(4, TreeNode(3, None, None),
                          TreeNode(2, None, None)), TreeNode(1, None, None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
@@ -382,7 +412,7 @@ print("result")
 #print(countSubstrings("abc"))
 # print(minPathSum([[1,3,1],[1,5,1],[4,2,1]]))
 #print(partitionLabels("vhaagbqkaq"))
-print(diagonalSum([[1,2,3],[4,5,6],[7,8,9]]))
+print(decodeString("3[a2[c]]"))
 
 
 # 
