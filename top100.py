@@ -1,4 +1,6 @@
 from itertools import permutations
+
+
 class TreeNode(object):
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -11,7 +13,9 @@ class ListNode(object):
         self.val = val
         self.next = next
 
-#155
+# 155
+
+
 class MinStack(object):
 
     def __init__(self):
@@ -45,8 +49,6 @@ class MinStack(object):
 
     def getMin(self) -> int:
         return self.minimum[self.n-1]
-
-
 
 
 class Solution(object):
@@ -251,7 +253,7 @@ class Solution(object):
                 maxProfit = price - minPrice
         return maxProfit
 
-    #543 diameter of binary tree
+    # 543 diameter of binary tree
     def diameterOfBinaryTree(self, root):
         """
         :type root: TreeNode
@@ -259,36 +261,39 @@ class Solution(object):
         """
         if root is None:
             return 0
+
         def helper(root):
             if not root:
-                return 0,0
+                return 0, 0
             else:
-                l,ll = helper(root.left)
-                r,rr = helper(root.right)
-                return max(l,r)+1, max(l+r,ll,rr)
+                l, ll = helper(root.left)
+                r, rr = helper(root.right)
+                return max(l, r)+1, max(l+r, ll, rr)
         a, b = helper(root)
-        return max(a-1,b)
+        return max(a-1, b)
 
-    #70 climb stairs each time you can climb either 1 or 2 steps
+    # 70 climb stairs each time you can climb either 1 or 2 steps
     def climbStairs(self, n):
         """
         :type n: int
         :rtype: int
         """
         count = 0
-        def recursion (CurrSteps):
-            nonlocal count 
+
+        def recursion(CurrSteps):
+            nonlocal count
             if n == 0:
-                count +=1
+                count += 1
             else:
-                if (n-1)> 0:
-                    left = CurrSteps -1
+                if (n-1) > 0:
+                    left = CurrSteps - 1
                     recursion(left)
                 if (n-2) > 0:
-                    left = CurrSteps -2
-                    recursion (left)
+                    left = CurrSteps - 2
+                    recursion(left)
         recursion(n)
         return count
+
     def dpClimbStairs(self, n):
         if n < 2:
             return n
@@ -301,7 +306,7 @@ class Solution(object):
 
         return dp[n]
 
-    #101. Symmetric Tree
+    # 101. Symmetric Tree
     def isSymmetric(self, root):
         """
         :type root: TreeNode
@@ -311,6 +316,7 @@ class Solution(object):
             return True
         if(root.left == None and root.right == None):
             return True
+
         def isMirror(left, right):
             if (left == None or right == None):
                 return left == right
@@ -319,8 +325,8 @@ class Solution(object):
             return isMirror(left.left, right.right) and isMirror(left.right, right.left)
         return isMirror(root.left, root.right)
 
+    # 53. Maximum Subarray
 
-    #53. Maximum Subarray
     def maxSubArray(self, nums):
         """
         :type nums: List[int]
@@ -345,15 +351,14 @@ class Solution(object):
         # return maxSum
         maxSub, curSum = nums[0], 0
         for n in nums:
-            if curSum <0:
+            if curSum < 0:
                 curSum = 0
             curSum += n
             maxSub = max(maxSub, curSum)
         return maxSub
 
+    # 1. Two Sum
 
-
-    #1. Two Sum
     def twoSum(self, nums, target):
         """
         :type nums: List[int]
@@ -361,16 +366,16 @@ class Solution(object):
         :rtype: List[int]
         """
         d = {}
-        for i in range (len(nums)):
+        for i in range(len(nums)):
             diff = target - nums[i]
             if diff in d:
                 return[d[diff], i]
             d[num[i]] = i
 
-    #198
+    # 198
     def rob(self, nums):
         """
-        :type nums: List[int] 
+        :type nums: List[int]
         :rtype: int
         """
         result = []
@@ -381,7 +386,7 @@ class Solution(object):
             if (idx >= len(nums)):
                 return 0
             if result[idx] == 0:
-                #result[idx] = nums[idx]
+                # result[idx] = nums[idx]
                 money = max(nums[idx] + robHelper(result, nums,
                                                     idx+2), robHelper(result, nums, idx+1))
                 if (money > result[idx]):
@@ -391,7 +396,8 @@ class Solution(object):
             return result[idx]
 
         return robHelper(result, nums, 0)
-    #198
+    # 198
+
     def robDP(self, nums):
         if (len(nums) == 0):
             return 0
@@ -404,9 +410,9 @@ class Solution(object):
         for i in range(2, len(nums)):
             result.append(max(result[i-2] + nums[i], result[i-1]))
         return result[-1]
-            
 
-    #141 Linked List Cycle
+    # 141 Linked List Cycle
+
     def hasCycle(self, head):
         """
         :type head: ListNode
@@ -434,7 +440,7 @@ class Solution(object):
             slow = slow.next
             fast = fast.next.next
 
-    #160 intersection of Two Linked List
+    # 160 intersection of Two Linked List
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
         if (headA == None or headB == None):
             return None
@@ -449,8 +455,8 @@ class Solution(object):
                 return down
             down = down.next
         return None
-    
-    #234. Palindrome Linked List
+
+    # 234. Palindrome Linked List
     def isPalindrome(self, head: ListNode) -> bool:
         stack = []
         copy = head
@@ -462,15 +468,15 @@ class Solution(object):
                 return False
             copy = copy.next
         return True
-    
-    #20. Valid Parentheses
+
+    # 20. Valid Parentheses
     def isValid(self, s: str) -> bool:
-        stack =[]
+        stack = []
         for bracket in s:
             if len(stack) == 0:
                 stack.append(bracket)
             else:
-                if bracket == "(" or bracket == "{" or bracket=="[":
+                if bracket == "(" or bracket == "{" or bracket == "[":
                     stack.append(bracket)
                 elif bracket == ")":
                     if stack[len(stack)-1] == "(":
@@ -491,49 +497,49 @@ class Solution(object):
             return True
         return False
 
-    #581. Shortest Unsorted Continuous Subarray
+    # 581. Shortest Unsorted Continuous Subarray
     def findUnsortedSubarray(self, nums: List[int]) -> int:
         sortedArray = nums.sort()
         first = 0
-        last =len(nums)-1
+        last = len(nums)-1
         while first != last:
             if (nums[first] == sortedArray[first]):
-                first +=1
+                first += 1
                 break
         while first != last:
             if (nums[last] == sortedArray[last]):
-                last -=1
+                last -= 1
                 break
         if first == last:
             return 0
-        else :
-            return last -first +1
+        else:
+            return last - first + 1
 
     # ***************************Medium******************************
 
-    #338.Counting Bits
+    # 338.Counting Bits
     def countBits(self, num: int) -> List[int]:
         result = []
-        for i in range (num+1):
+        for i in range(num+1):
             result.append(str(bin(i+1)).count("1"))
         return result
 
-    
-        
-    #406. Queue Reconstruction by Height
+    # 406. Queue Reconstruction by Height
+
     def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
-        #Before: [[9,0],[7,0],[1,9],[3,0],[2,7],[5,3],[6,0],[3,4],[6,2],[5,2]]
+        # Before: [[9,0],[7,0],[1,9],[3,0],[2,7],[5,3],[6,0],[3,4],[6,2],[5,2]]
         sortedPpl = sorted(people)
-        #After first sort: [[1, 9], [2, 7], [3, 0], [3, 4], [5, 2], [5, 3], [6, 0], [6, 2], [7, 0], [9, 0]]
+        # After first sort: [[1, 9], [2, 7], [3, 0], [3, 4], [5, 2], [5, 3], [6, 0], [6, 2], [7, 0], [9, 0]]
         middlePpl = []
-        for i in range (0, len(sortedPpl)):
+        for i in range(0, len(sortedPpl)):
             if (not middlePpl):
                 middlePpl.append(sortedPpl[i])
             else:
                 if (sortedPpl[i][0] > middlePpl[0][0]):
                     middlePpl.insert(0, sortedPpl[i])
                 else:
-                    middlePpl.insert(middlePpl.index(sortedPpl[i-1])+1, sortedPpl[i])
+                    middlePpl.insert(middlePpl.index(
+                        sortedPpl[i-1])+1, sortedPpl[i])
         # After second sort: [[9, 0], [7, 0], [6, 0], [6, 2], [5, 2], [5, 3], [3, 0], [3, 4], [2, 7], [1, 9]]
         result = []
         for person in middlePpl:
@@ -543,7 +549,7 @@ class Solution(object):
                 result.insert(person[1], person)
         return result
 
-    #46. Permutations
+    # 46. Permutations
     def permute(self, nums):
         """
         :type nums: List[int]
@@ -555,17 +561,17 @@ class Solution(object):
         for i in list(perm):
             result.append(list(i))
         return result
-    
 
+    # 94. Binary Tree Inorder Traversal   Very Important knowledge
 
-    #94. Binary Tree Inorder Traversal   Very Important knowledge
     def inorderTraversal(self, root):
         """
         :type root: TreeNode
         :rtype: List[int]
         """
         result = []
-        def traverse (node, result):
+
+        def traverse(node, result):
             if node is None:
                 return
             else:
@@ -574,9 +580,9 @@ class Solution(object):
                 traverse(node.right, result)
         traverse(root, result)
         return result
-    
 
-    #739. Daily Temperatures 
+    # 739. Daily Temperatures
+
     def dailyTemperatures(self, T):
         """
         :type T: List[int]
@@ -594,8 +600,8 @@ class Solution(object):
             stack.append(i)
 
         return result
-        
-    #22. Generate Parentheses
+
+    # 22. Generate Parentheses
     def generateParenthesis(self, n):
         """
         :type n: int
@@ -618,9 +624,9 @@ class Solution(object):
                                       currOpenBra, currCloseBra + 1, result)
         createParenthesis(n, "", currOpenBra, currCloseBra, result)
         return result
-        
-    
-    #78. Subsets
+
+    # 78. Subsets
+
     def subsets(self, nums):
         """
         :type nums: List[int]
@@ -647,7 +653,8 @@ class Solution(object):
         for i in range(0, len(nums)):
             createSubsets(result, i, [])
         return result
-    #347. Top K Freduent Elements
+    # 347. Top K Freduent Elements
+
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         result = []
         dic = {}
@@ -662,46 +669,47 @@ class Solution(object):
                 result.append(num)
         return result
 
-    #647. Palindromic Substrings
+    # 647. Palindromic Substrings
     def countSubstrings(self, s: str) -> int:
         result = 0
+
         def checkPalindromic(s):
             return s == s[::-1]
 
         def checkSubstr(s, currStr, idx, result):
-            if (idx == len(s) -1):
+            if (idx == len(s) - 1):
                 if(checkPalindromic(currStr + s[idx])):
-                    result +=1
+                    result += 1
                     return
             else:
                 if(checkPalindromic(currStr + s[idx])):
-                    result +=1
+                    result += 1
                 checkSubstr(s, currStr, idx+1, result)
         checkSubstr(s, "", 0, result)
         return result
 
+    # 238. Product of Array Except Self
 
-    #238. Product of Array Except Self 
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         pre = []
-        post= []
-        for i in range (len(nums)):
-            if i ==0 :
+        post = []
+        for i in range(len(nums)):
+            if i == 0:
                 pre.append(1)
             else:
                 pre.append(pre[-1]*nums[i-1])
-        for j in range (len(nums)-1, -1, -1):
+        for j in range(len(nums)-1, -1, -1):
             if j == len(nums)-1:
                 post.append(1)
             else:
                 post.append(post[-1] * nums[j+1])
         result = []
-        for i in range (len(nums)):
+        for i in range(len(nums)):
             result.append(pre[i]*post[len(nums)-i-1])
-        return result             
+        return result
 
-            
-    #49. Group Anagrams
+    # 49. Group Anagrams
+
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         dic = {}
         for str in strs:
@@ -715,20 +723,22 @@ class Solution(object):
                 dic[string].append(str)
         return dic.values()
 
-    #48.Rotate Image
+    # 48.Rotate Image
     def rotate(self, matrix: List[List[int]]) -> None:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        for i in range (len(matrix)// 2):
-            for j in range (i, len(matrix[i])-1-i):
+        for i in range(len(matrix) // 2):
+            for j in range(i, len(matrix[i])-1-i):
                 temp = matrix[i][j]
                 matrix[i][j] = matrix[len(matrix)-1-j][i]
-                matrix[len(matrix)-1-j][i] = matrix[len(matrix)-1-i][len(matrix)-1 -j]
-                matrix[len(matrix)-1-i][len(matrix)-1-j] = matrix[j][len(matrix)-1-i]
+                matrix[len(matrix)-1-j][i] = matrix[len(matrix) -
+                           1-i][len(matrix)-1 - j]
+                matrix[len(matrix)-1-i][len(matrix)-1 -
+                           j] = matrix[j][len(matrix)-1-i]
                 matrix[j][len(matrix)-1-i] = temp
 
-    #39. Combination Sum
+    # 39. Combination Sum
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         if target == 0:
             return [[]]
@@ -739,8 +749,7 @@ class Solution(object):
                         l for l in self.combinationSum(candidates[i:], target - n)]
         return ans
 
-
-    #287. Find the Duplicate Number
+    # 287. Find the Duplicate Number
 
     def findDuplicate(self, nums: List[int]) -> int:
         st = set()
@@ -750,15 +759,16 @@ class Solution(object):
             else:
                 return num
 
-    #215. Kth Largest Element in an Array]
+    # 215. Kth Largest Element in an Array]
     def findKthLargest(self, nums: List[int], k: int) -> int:
         return sorted(nums)[len(nums)-k]
 
-    #102. Binary Tree Order Traversal
+    # 102. Binary Tree Order Traversal
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
         if root == None:
             return []
         dic = {0: []}
+
         def bfs(node, level):
             if(node == None):
                 return
@@ -771,7 +781,7 @@ class Solution(object):
         bfs(root, 0)
         return dic.values()
 
-    #64. Minimum Path Sum
+    # 64. Minimum Path Sum
     def minPathSum(self, grid: List[List[int]]) -> int:
         m = len(grid)
         n = len(grid[0])
@@ -785,10 +795,11 @@ class Solution(object):
                     result[i][j] = result[i-1][j] + grid[i][j]
                     continue
                 else:
-                    result[i][j] = grid[i][j] + min(result[i-1][j], result[i][j-1])
+                    result[i][j] = grid[i][j] + \
+                        min(result[i-1][j], result[i][j-1])
         print(result)
         return result[m-1][n-1]
-    
+
     def minPathSum1(self, grid: List[List[int]]) -> int:
         result = []
         m = len(grid)
@@ -823,7 +834,7 @@ class Solution(object):
                 result[i][j] = grid[i][j] + min(result[i-1][j], result[i][j-1])
         return result[m-1][n-1]
 
-    #62. Unique Paths
+    # 62. Unique Paths
     def uniquePaths(self, m: int, n: int) -> int:
         if (m == 1 or n == 1):
             return 1
@@ -844,8 +855,8 @@ class Solution(object):
                 result[i][j] = result[i-1][j] + result[i][j-1]
         return result[n-1][m-1]
 
+    # 96. Unique Binary Search Tree
 
-    #96. Unique Binary Search Tree
     def numTrees(self, n: int) -> int:
         '''
         if 0 then 0
@@ -874,21 +885,22 @@ class Solution(object):
             result[i] = sum
         return result[n]
 
-    #11. Contain the most water
+    # 11. Contain the most water
     def maxArea(self, height: List[int]) -> int:
         left = 0
-        right = len(height) -1
+        right = len(height) - 1
         maxA = 0
         while (left < right):
-            area = (right - left) * min (height[right], height[left])
+            area = (right - left) * min(height[right], height[left])
             if area > maxA:
-                maxA =area
-            if height[right]> height[left]:
-                left +=1
+                maxA = area
+            if height[right] > height[left]:
+                left += 1
             else:
-                right -=1
+                right -= 1
         return maxA
-    #73. Partition Labels
+
+    # 73. Partition Labels
     def partitionLabels(self, S: str) -> List[int]:
         dic = {}
         for i in range(len(S)):
@@ -920,7 +932,7 @@ class Solution(object):
                 result.append(rst)
         return result
 
-    #337. House Robber III
+    # 337. House Robber III
     def rob(self, root: TreeNode) -> int:
         if (root is None):
             return 0
@@ -940,7 +952,7 @@ class Solution(object):
 
         return rob_helper(root, False)
 
-        #337. House Robber III
+    # 337. House Robber III
 
     def rob(self, root: TreeNode) -> int:
         def superrob(node):
@@ -964,9 +976,8 @@ class Solution(object):
             return (now, later)
 
         return max(superrob(root))
-        
-    
-    #394 Decode String
+
+    # 394 Decode String
 
     def decodeString(self, s: str) -> str:
         stack = []
@@ -1009,3 +1020,58 @@ class Solution(object):
                 dfs(node.right, depth=depth+1)
         dfs(root, 0)
         return [layers[i][-1] for i in range(len(layers))]
+
+    # 208 Implement Trie(Prefix Tree)
+    class Trie:
+        def __init__(self):
+            """
+            Initialize your data structure here.
+            """
+            self.ds = []
+
+        def insert(self, word: str) -> None:
+            """
+            Inserts a word into the trie.
+            """
+            self.ds.append(word)
+
+        def search(self, word: str) -> bool:
+            """
+            Returns if the word is in the trie.
+            """
+            if word not in self.ds:
+                return False
+            return True
+
+        def startsWith(self, prefix: str) -> bool:
+            """
+            Returns if there is any word in the trie that starts with the given prefix.
+            """
+            for word in self.ds:
+                if word.startswith(prefix):
+                    return True
+            return False
+
+    # 114 Flatten Binary Tree to Linked List
+    def flatten(self, root):
+        '''
+        1. flatten left subtree
+        2. find left subtree's tail
+        3. set root's left to None, root's right to root'left, tail's right to root.right
+        4. flatten the original right subtree
+        '''
+        # escape condition
+        if not root:
+            return
+        right = root.right
+        if root.left:
+            # flatten left subtree
+            self.flatten(root.left)
+            # find the tail of left subtree
+            tail = root.left
+            while tail.right:
+                tail = tail.right
+            # left <-- None, right <-- left, tail's right <- right
+            root.left, root.right, tail.right = None, root.left, right
+        # flatten right subtree
+        self.flatten(right)
