@@ -988,7 +988,24 @@ class Solution(object):
                 curString += c
         return curString
 
-    # 
-                    
+    # 199 Binary Tree Right Side View
+    def rightSideView(self, root):
+        if root == None:
+            return []
 
+        layers = {}
 
+        def dfs(node: TreeNode, depth):
+            if depth not in layers:
+                layers[depth] = []
+                layers[depth].append(node.val)
+            else:
+                layers[depth].append(node.val)
+            if (node.left == None and node.right == None):
+                return
+            if node.left != None:
+                dfs(node.left, depth=depth+1)
+            if node.right != None:
+                dfs(node.right, depth=depth+1)
+        dfs(root, 0)
+        return [layers[i][-1] for i in range(len(layers))]

@@ -398,6 +398,26 @@ def decodeString(s):
     for alpha in stack:
         result += alpha
     return result
+def coin(array):
+    length = len(array)
+    one_first = []
+    zero_first = []
+    for i in range (length):
+        if i % 2 == 0:
+            one_first.append(1)
+            zero_first.append(0)
+        else:
+            one_first.append(0)
+            zero_first.append(1)
+    first_result =0 
+    second_result = 0
+    for i in range(len(array)):
+        if array[i] != one_first[i]:
+            first_result +=1
+        if array[i] != zero_first[i]:
+            second_result +=1
+    return min(first_result,second_result)
+def length_linkedList(array):
 A = TreeNode(5, TreeNode(4, TreeNode(3, None, None),
                          TreeNode(2, None, None)), TreeNode(1, None, None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
@@ -412,7 +432,7 @@ print("result")
 #print(countSubstrings("abc"))
 # print(minPathSum([[1,3,1],[1,5,1],[4,2,1]]))
 #print(partitionLabels("vhaagbqkaq"))
-print(decodeString("3[a2[c]]"))
+print(coin([0,1,1,0]))
 
 
 # 

@@ -1,6 +1,6 @@
+# Docker for beginners
 
 ![logo](asset/logo.jpg)
-# Docker for beginners
 
 ## Learn to build and deploy your distributed applications easily to the cloud with Docker
 
@@ -8,20 +8,32 @@
 
 ---
 
-# Introduction
+## Introduction
 
-## What is Docker?
+### What is Docker?
 
 Wikipedia defines [Docker](https://www.docker.com) as
-> an opens-source project that automates the deployment of software applications inside **containers** by providing an additinal layer of abstraction and automation of **OS-level virtualization** on Linux 
 
-Awesome! 👍 That's a mouthful. In simple words, Docker is a tool that allows developers to easily deploy their applicatons in a sandbox(called containers) to run on the ost operating system i.e. Linux. The key benefit of Docker is that it allows users to package an application with all of its dependencies into a standardized unit for software development. 
+> an opens-source project that automates the deployment of software applications inside **containers** by providing an additinal layer of abstraction and automation of **OS-level virtualization** on Linux
 
-## What are containers?
-Containers offer alogical packaging mechanism in which applications can be absctrated from the environment in which they actually run. This decoupling allows container-based aplications to be deployed easily and consistently, regardlessof whether the target environment is a private data center, the public cloud, or even a developer's personal local machine. This gives developers the ability to create predictable environments that are isolated from the rest of the applications and can be run anywhere.
+Awesome! 👍 That's a mouthful. In simple words, Docker is a tool that allows developers to easily deploy their applications in a sandbox(called containers) to run on the ost operating system i.e. Linux. The key benefit of Docker is that it allows users to package an application with all of its dependencies into a standardized unit for software development.
 
-From an operations standpoint, apart from portability containers also give more granular control over resources giving your infrastructure improved efficiency which can result in beter utilization of your compute resources.
+### What are containers?
 
-## What will this tutorial be teaching?
+Containers offer a logical packaging mechanism in which applications can be abstracted from the environment in which they actually run. This decoupling allows container-based applications to be deployed easily and consistently, regardless of whether the target environment is a private data center, the public cloud, or even a developer's personal local machine. This gives developers the ability to create predictable environments that are isolated from the rest of the applications and can be run anywhere.
+
+From an operations standpoint, apart from portability containers also give more granular control over resources giving your infrastructure improved efficiency which can result in better utilization of your compute resources.
+
+### Terminology
+
+Before we go further, let me clarify some Docker-specific jargon that is used frequently in the Docker System.
+
+- Image: The blueprints of our applications which form the basis of containers.
+- Container: Created from Docker images and run the actual application.
+- Docker Daemon: The background service running on the host that manages building, running and distributing Docker containers. The daemon is the process that runs in the operating system which clients talk to.
+- Docker Client: The command line tool that allows the user to interact with the daemon.
+- Docker Hub: A [registry](https://hub.docker.com/search?q=&type=image) of Docker images. You can think of all available Docker images. If required, one can host their own Docker registries can use them for pulling images.
+
+### What will this tutorial be teaching?
 
 This tutorial aims to be the one-stop shop for getting your hands dirty with Docker. Apart from demystifying the Docker landscape, it'll give you hands-on experience with building and deploying your own webapps on the Cloud. We'll be using Amazon Web Services to deploy a static website, and two dynamic webapps on EC2 using Elastic Beanstalk and Elastic Container Service. Even if you have no prior experience with deployments, this tutorial should be all you need to get started. Let's get started!!!! 🏃
