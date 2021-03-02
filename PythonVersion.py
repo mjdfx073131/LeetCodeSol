@@ -1295,3 +1295,17 @@ class Solution:
             if (i == len(prices) - 2):
                 result.append(prices[-1])
         return result
+
+    #1748. Sum of Unique Elements
+    def sumOfUnique(self, nums: List[int]) -> int:
+        visited = {}
+        result = 0
+        for num in nums:
+            if num not in visited:
+                visited[num] = 1
+                result += num
+            else:
+                if visited[num] != 0:
+                    result -= num
+                    visited[num] -= 1
+        return result

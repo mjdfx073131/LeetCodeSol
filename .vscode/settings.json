@@ -1,0 +1,13 @@
+{
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "python.pythonPath": "/usr/local/bin/python3",
+    "cSpell.ignoreWords": [
+        "hongkaiyue",
+        "zhou"
+    ]
+}
