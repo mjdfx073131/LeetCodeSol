@@ -417,7 +417,43 @@ def coin(array):
         if array[i] != zero_first[i]:
             second_result +=1
     return min(first_result,second_result)
-def length_linkedList(array):
+
+def kClosest(points, k):
+    distances = []
+    result = []
+    maxDis = 0
+    for point in points:
+        dis = (point[0] - 0)**2 + (point[1] - 0)**2
+        if len(result) < k:
+            if dis >= maxDis:
+                maxDis = dis
+                result.append(point)
+                distances.append(dis)
+            else:
+                if (len(distances) == 1):
+                    distances.insert(0, dis)
+                    result.insert(0, point)
+                else:
+                    for i in range (0, len(distances)-1):
+                        if dis >= distances[i] and dis <= distances[i+1]:
+                            distances.insert(i+1, dis)
+                            result.insert(i+1, point)
+        else:
+            if (dis <= maxDis):
+                if (k == 1):
+                    result[0] = point
+                else:
+                    for i in range (0, len(distances)):
+                        if dis >= distances[i] and dis <= distances[i+1]:
+                            distances.insert(i+1, dis)
+                            distances.pop()
+                            result.insert(i+1, point)
+                            result.pop()
+                            break
+                maxDis = distances[-1]
+
+    return result
+
 A = TreeNode(5, TreeNode(4, TreeNode(3, None, None),
                          TreeNode(2, None, None)), TreeNode(1, None, None))
 B = TreeNode(5, TreeNode(3, None, None), TreeNode(2, None,None))
@@ -432,21 +468,5 @@ print("result")
 #print(countSubstrings("abc"))
 # print(minPathSum([[1,3,1],[1,5,1],[4,2,1]]))
 #print(partitionLabels("vhaagbqkaq"))
-print(coin([0,1,1,0]))
+print(kClosest([[6, 10], [-3, 3], [-2, 5], [0, 2]], 3))
 
-
-# 
-
-def solution (G):
-    result =[0,0,0]
-    for i in range(len(G)):
-        if G[i] == "R":
-            result[0] +=2
-            result[2] +=1
-        elif G[i] == "S":
-            result[2] +=2
-            result[1] +=1
-        else:
-            result[0] +=1
-            result[1] +=2
-    return max(result)

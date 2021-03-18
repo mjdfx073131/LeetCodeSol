@@ -1075,3 +1075,5 @@ class Solution(object):
             root.left, root.right, tail.right = None, root.left, right
         # flatten right subtree
         self.flatten(right)
+
+    
