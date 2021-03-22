@@ -36,4 +36,30 @@ Before we go further, let me clarify some Docker-specific jargon that is used fr
 
 ### What will this tutorial be teaching?
 
-This tutorial aims to be the one-stop shop for getting your hands dirty with Docker. Apart from demystifying the Docker landscape, it'll give you hands-on experience with building and deploying your own webapps on the Cloud. We'll be using Amazon Web Services to deploy a static website, and two dynamic webapps on EC2 using Elastic Beanstalk and Elastic Container Service. Even if you have no prior experience with deployments, this tutorial should be all you need to get started. Let's get started!!!! 🏃
+This tutorial aims to be the one-stop shop for getting your hands dirty with Docker. Apart from demystifying the Docker landscape, it'll give you hands-on experience with building and deploying your own web apps on the Cloud. We'll be using Amazon Web Services to deploy a static website, and two dynamic webapps on EC2 using Elastic Beanstalk and Elastic Container Service. Even if you have no prior experience with deployments, this tutorial should be all you need to get started. Let's get started!!!! 🏃
+
+----
+
+## GETTING STARTED
+
+### Prerequisites
+
+There are no specific skills needed for this tutorial beyond a basic comfort with the command line and using a text editor. This tutorial uses `git clone` to clone the repository locally. If you don't have Git installed on your system, either install it or remember to manually download the zip files from Github. Prior experience in developing web applications will be helpful but is not required. As we proceed further along the tutorial, we'll make use of a few cloud services. If you're interested in following along, please create an account on each of these websites:
+
+- [Amazon Web Services](http://aws.amazon.com)
+- [Docker Hub](https://hub.docker.com)
+
+### Setting up your computer
+
+The getting started guide on Docker has detailed instructions for setting up Docker on Mac, Linux and Windows.
+
+Once you are done installing Docker, test your Docker installation by running the following:
+
+
+```bash
+$ docker run hello-world
+
+Hello from Docker.
+This message shows your installation appears to be working correctly
+
+```

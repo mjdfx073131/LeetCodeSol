@@ -1,5 +1,5 @@
 from itertools import permutations
-
+from typing import List
 
 class TreeNode(object):
     def __init__(self, val=0, left=None, right=None):

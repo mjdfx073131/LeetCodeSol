@@ -1,43 +1,36 @@
 from typing import List
-import math
+
 class Solution:
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-        euclidean_distance = {}
-        result = []
-        for point in points:
-            dis = (point[0] - 0)**2 + (point[1] - 0)**2
-            if(dis not in euclidean_distance):
-                euclidean_distance[dis] = []
-            euclidean_distance[dis].append(point)
-        # print(euclidean_distance)
-        i = 0
-        while True:
-            for point in euclidean_distance[sorted(euclidean_distance.keys())[i]]:
-                if len(result) < k:
-                    result.append(point)
-                    if (len(result) == k):
-                        return result
-                else:
-                    return result
-            i += 1
+        dist = lambda i: points[i][0]**2 +points[i][1]**2
 
-    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-        result = []
-        maxDis = 0
-        for point in points:
-            dis = (point[0] - 0)**2 + (point[1] - 0)**2
-            if len(result) < k:
-                if dis > maxDis:
-                    maxDis = dis
-                    result.append(point)
-                else:
-                    result.insert(0, point)
-            else:
-                if dis < maxDis:
-                    result.insert(0, point)
-                    result.pop()
-        return result
+        results = []
+        for i in range(len(points)):
+            points[i] = (points[i][0]**2 + points[i][1]**2,
+                         points[i])  # (distance, point) tuple
+        self.quickSelectHelper(points, 0, len(points)-1, K)
+        for i in range(K):
+            results.append(points[i][1])
+        return results
 
-
-
+    def quickSelectHelper(self, arr, start, end, K):
+        if start >= end:
+            return
+        i, j = start + 1, end
+        while i <= j:
+            # compare the first element in tuple (distance)
+            while i <= j and arr[i][0] <= arr[start][0]:
+                i += 1
+            # compare the first element in tuple (distance)
+            while i <= j and arr[j][0] >= arr[start][0]:
+                j -= 1
+            if i < j:
+                arr[i], arr[j] = arr[j], arr[i]
+        arr[start], arr[j] = arr[j], arr[start]
+        if K == j:
+            return
+        elif K < j:
+            self.quickSelectHelper(arr, start, j-1, K)
+        else:
+            self.quickSelectHelper(arr, j+1, end, K)
 
