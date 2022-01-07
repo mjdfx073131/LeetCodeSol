@@ -16,7 +16,7 @@
 ```python
 class Kerry:
     def __init__(self):
-        self.name = "Hongkaiyue(Kerry) Zhou"
+        self.name = "Kerry Zhou"
         self.hobbies = ["soccer", "music"]
         self.motto = "More than Kerry"
 ```
